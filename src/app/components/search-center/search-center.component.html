@@ -1,0 +1,28 @@
+<div>
+    <h1>Trouver un centre de vaccination</h1>
+  
+    <!-- Champ de saisie pour la ville -->
+    <input
+      type="text"
+      placeholder="Dans quelle ville ?"
+      [(ngModel)]="city"
+      (input)="filterCenters()" 
+    />
+  
+    <!-- Liste des centres disponibles -->
+    <div *ngIf="city && filteredCenters.length > 0; else noResults">
+      <div *ngFor="let center of filteredCenters" class="center-card">
+        <p><strong>{{ center.name }}</strong></p>
+        <p>{{ center.address }}</p>
+        <div class="button-container">
+            <button (click)="chooseCenter(center)">Choisir</button>
+          </div>
+      </div>
+    </div>
+  
+    <!-- Message si aucun centre n'est trouvé -->
+    <ng-template #noResults>
+      <p *ngIf="city">Aucun centre trouvé pour cette ville.</p>
+    </ng-template>
+  </div>
+  

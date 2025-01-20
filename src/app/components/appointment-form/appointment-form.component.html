@@ -1,0 +1,63 @@
+<div>
+    <h1>Prise de rendez-vous vaccination</h1>
+    <div class="selected-center">
+        <h2>Centre sélectionné</h2>
+        <p><strong>Nom :</strong> {{ selectedCenter?.name }}</p>
+        <p><strong>Adresse :</strong> {{ selectedCenter?.address }}</p>
+    </div>
+      
+    <form #form="ngForm" (ngSubmit)="submit(form)" class="appointment-form">
+        <label for="firstName">Prénom</label>
+        <input 
+          id="firstName" 
+          [(ngModel)]="formData.firstName" 
+          name="firstName" 
+          required 
+        />
+        <div *ngIf="form.submitted && !formData.firstName" class="error">
+          Prénom est requis.
+        </div>
+      
+        <label for="lastName">Nom</label>
+        <input 
+          id="lastName" 
+          [(ngModel)]="formData.lastName" 
+          name="lastName" 
+          required 
+        />
+        <div *ngIf="form.submitted && !formData.lastName" class="error">
+          Nom est requis.
+        </div>
+      
+        <label for="email">Email</label>
+        <input 
+          id="email" 
+          [(ngModel)]="formData.email" 
+          name="email" 
+          type="email" 
+          required 
+        />
+        <div *ngIf="form.submitted && !formData.email" class="error">
+          Email est requis.
+        </div>
+      
+        <label for="date">Date du rendez-vous</label>
+        <input 
+          id="date" 
+          type="date" 
+          [(ngModel)]="formData.date" 
+          name="date" 
+          required 
+        />
+        <div *ngIf="form.submitted && !formData.date" class="error">
+          Date est requise.
+        </div>
+      
+        <div *ngIf="form.submitted && !form.valid" class="error">
+          Vous avez pas rempli toutes les informations.
+        </div>
+      
+        <button type="submit">Réserver</button>
+      </form>
+  </div>
+  

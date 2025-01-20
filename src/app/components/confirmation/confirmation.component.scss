@@ -1,0 +1,46 @@
+h1 {
+    text-align: center;
+    color: #2ecc71;
+    margin-bottom: 20px;
+  }
+  
+  p {
+    text-align: center;
+    font-size: 18px;
+    color: #2c3e50;
+    margin-top: 10px;
+  }
+  
+  .container {
+    margin: 50px auto;
+    width: 80%;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .button-container {
+    display: flex; /* Utiliser Flexbox */
+    justify-content: center; /* Centrer horizontalement */
+    align-items: center; /* Centrer verticalement (si le conteneur a une hauteur définie) */
+    margin-top: 20px; /* Espacement au-dessus */
+  }
+  
+  button {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white;
+    background-color: #3498db;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  
+    &:hover {
+      background-color: #2980b9;
+    }
+  }
+  
+  
