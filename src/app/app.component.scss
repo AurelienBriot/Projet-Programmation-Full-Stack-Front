@@ -1,0 +1,18 @@
+html, body {
+    margin: 0; /* Supprime les marges par défaut */
+    padding: 0; /* Supprime les padding par défaut */
+    height: 100%; /* Assure que `body` et `html` occupent toute la hauteur */
+    overflow: hidden; /* Empêche le défilement */
+  }
+  
+  :host {
+    display: block;
+    height: 100vh; /* L'élément couvre toute la hauteur de la fenêtre */
+    width: 100%; /* L'élément couvre toute la largeur */
+    background-image: url('/vaccin.avif'); /* Chemin vers l'image */
+    background-size: cover; /* Couvre tout l'espace sans déformation */
+    background-position: center; /* Centre l'image */
+    background-repeat: no-repeat; /* Empêche la répétition */
+  }
+ 
+    

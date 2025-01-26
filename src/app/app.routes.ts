@@ -5,9 +5,8 @@ import { AppointmentFormComponent } from './components/appointment-form/appointm
 import { ConfirmationComponent } from './components/confirmation/confirmation.component';
 
 export const routes: Routes = [
-  { path: '', component: AppComponent }, 
+  { path: '', redirectTo: 'search', pathMatch: 'full' },
   { path: 'search', component: SearchCenterComponent },
   { path: 'appointment', component: AppointmentFormComponent },
   { path: 'confirmation', component: ConfirmationComponent },
 ];
-
