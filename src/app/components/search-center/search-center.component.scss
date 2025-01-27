@@ -3,17 +3,28 @@ h1 {
     color: #2c3e50;
     margin-bottom: 20px;
   }
-  
-  input[type='text'] {
-    width: 40%;
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-bottom: 10px;
-    display: block;
-    margin: 0 auto;
-  }
+
+.page {
+  text-align: center;
+}
+
+.barre-recherche {
+  width: 40%;
+}
+.mat-form-field {
+  width: 100%;
+}
+
+  // input[type='text'] {
+  //   width: 40%;
+  //   padding: 10px;
+  //   font-size: 16px;
+  //   border: 1px solid #ccc;
+  //   border-radius: 5px;
+  //   margin-bottom: 10px;
+  //   display: block;
+  //   margin: 0 auto;
+  // }
   .center-card {
     display: flex;
     flex-direction: column;
@@ -24,6 +35,8 @@ h1 {
     background-color: #f9f9f9;
     max-width: 400px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    margin-bottom: 1%;
   }
   
   .center-card p {
@@ -35,18 +48,18 @@ h1 {
     justify-content: flex-end; /* Aligne le bouton à droite */
   }
   
-  button {
-    padding: 8px 15px;
-    background-color: #3498db;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 14px;
+  // button {
+  //   padding: 8px 15px;
+  //   background-color: #3498db;
+  //   color: white;
+  //   border: none;
+  //   border-radius: 5px;
+  //   cursor: pointer;
+  //   font-size: 14px;
   
-    &:hover {
-      background-color: #2980b9;
-    }
-  }
+  //   &:hover {
+  //     background-color: #2980b9;
+  //   }
+  // }
   
   
