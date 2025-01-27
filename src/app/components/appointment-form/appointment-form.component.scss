@@ -4,81 +4,79 @@ h1 {
     margin-bottom: 20px;
   }
   
-  form {
-    width: 24%;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    background-color: #f9f9f9;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+form {
+  width: auto;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  margin: 10px 0 5px;
+}
+
+button {
+  display: block;
+  margin: 20px auto 0;
+  padding: 10px 20px;
+  background-color: #27ae60;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #1e8449;
   }
-  
-  label {
-    display: block;
-    font-weight: bold;
-    margin: 10px 0 5px;
-  }
-  
-  input[type='text'],
-  input[type='email'],
-  input[type='date'] {
-    width: 50%;
-    padding: 10px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  button {
-    display: block;
-    margin: 20px auto 0;
-    padding: 10px 20px;
-    background-color: #27ae60;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-  
-    &:hover {
-      background-color: #1e8449;
-    }
-  }
-  .selected-center {
-    margin: 20px auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    background-color: #f9f9f9;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    max-width: 300px;
-    text-align: center;
-  }
-  
-  .selected-center h2 {
-    color: #2ecc71;
-    font-size: 24px;
-    margin-bottom: 10px;
-  }
-  
-  .selected-center p {
-    font-size: 18px;
-    color: #34495e;
-    margin: 5px 0;
-  }
-  
-  .informative-text {
-    font-size: 16px;
-    color: #34495e;
-    margin-top: 15px;
-    font-style: italic;
-  }
-  
-  .error {
-    color: red;
-    font-size: 14px;
-    margin-top: 5px;
-  }
+}
+
+.selected-center {
+  margin: 20px auto;
+  padding: 20px;
+  // border: 1px solid #ccc;
+  // border-radius: 8px;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 20%;
+  text-align: center;
+}
+
+.personnal-info {
+  margin: 20px auto;
+  padding: 20px;
+  // border: 1px solid #ccc;
+  // border-radius: 8px;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 40%;
+  text-align: center;
+}
+
+.selected-center-title, .personnal-info-title {
+  color: #299fee;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.selected-center p {
+  font-size: 18px;
+  color: #34495e;
+  margin: 5px 0;
+}
+
+.informative-text {
+  font-size: 16px;
+  color: #34495e;
+  margin-top: 15px;
+  font-style: italic;
+}
+
+.input {
+  width: 70%;
+}
+
+.mat-form-field {
+  width: 100%;
+}
   
   

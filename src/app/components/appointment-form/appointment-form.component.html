@@ -1,63 +1,71 @@
 <div>
     <h1>Prise de rendez-vous vaccination</h1>
-    <div class="selected-center">
-        <h2>Centre sélectionné</h2>
+    <mat-card class="selected-center">
+      <mat-card-title class="selected-center-title">Centre sélectionné</mat-card-title>
+      <mat-card-content>
         <p><strong>Nom :</strong> {{ selectedCenter?.name }}</p>
         <p><strong>Adresse :</strong> {{ selectedCenter?.address }}</p>
-    </div>
-      
-    <form #form="ngForm" (ngSubmit)="submit(form)" class="appointment-form">
-        <label for="firstName">Prénom</label>
-        <input 
-          id="firstName" 
-          [(ngModel)]="formData.firstName" 
-          name="firstName" 
-          required 
-        />
-        <div *ngIf="form.submitted && !formData.firstName" class="error">
-          Prénom est requis.
-        </div>
-      
-        <label for="lastName">Nom</label>
-        <input 
-          id="lastName" 
-          [(ngModel)]="formData.lastName" 
-          name="lastName" 
-          required 
-        />
-        <div *ngIf="form.submitted && !formData.lastName" class="error">
-          Nom est requis.
-        </div>
-      
-        <label for="email">Email</label>
-        <input 
-          id="email" 
-          [(ngModel)]="formData.email" 
-          name="email" 
-          type="email" 
-          required 
-        />
-        <div *ngIf="form.submitted && !formData.email" class="error">
-          Email est requis.
-        </div>
-      
-        <label for="date">Date du rendez-vous</label>
-        <input 
-          id="date" 
-          type="date" 
-          [(ngModel)]="formData.date" 
-          name="date" 
-          required 
-        />
-        <div *ngIf="form.submitted && !formData.date" class="error">
-          Date est requise.
-        </div>
-      
-        <div *ngIf="form.submitted && !form.valid" class="error">
-          Vous avez pas rempli toutes les informations.
-        </div>
-      
-        <button type="submit">Réserver</button>
-      </form>
+      </mat-card-content>
+        
+    </mat-card>
+    
+    <mat-card class="personnal-info">
+      <mat-card-title class="personnal-info-title">Informations personnelles</mat-card-title>
+      <mat-card-content>
+        <form #form="ngForm" (ngSubmit)="submit(form)" class="appointment-form">
+            <mat-form-field class="input">
+              <mat-label for="firstName">Prénom</mat-label>
+              <input matInput
+                id="firstName" 
+                [(ngModel)]="formData.firstName" 
+                name="firstName" 
+                required 
+              />
+            </mat-form-field>
+            <br>
+            <mat-form-field class="input">
+              <mat-label for="lastName">Nom</mat-label>
+              <input matInput
+                id="lastName" 
+                [(ngModel)]="formData.lastName" 
+                name="lastName" 
+                required 
+              />
+            </mat-form-field>
+            <br>
+
+            <mat-form-field class="input">
+              <mat-label for="email">Email</mat-label>
+              <input matInput
+                id="email" 
+                [(ngModel)]="formData.email" 
+                name="email" 
+                type="email"
+                required 
+              />
+            </mat-form-field>
+            
+            <mat-form-field class="input">
+              <mat-label for="date">Date du rendez-vous</mat-label>
+              <input matInput [matDatepicker]="picker"
+                id="date" 
+                [(ngModel)]="formData.date" 
+                name="date" 
+                required 
+              />
+              <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+          
+            <div *ngIf="form.submitted && !form.valid" class="error">
+              Vous n'avez pas rempli toutes les informations.
+            </div>
+          
+            <button type="submit">Réserver</button>
+          </form>
+
+      </mat-card-content>
+      </mat-card>
+    
   </div>
   

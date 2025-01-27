@@ -2,14 +2,20 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms'; 
 import { Router } from '@angular/router';
+import { MatCardModule } from '@angular/material/card'; 
+import {MatFormFieldModule} from '@angular/material/form-field'; 
+import {MatInputModule} from '@angular/material/input';
+import {MatDatepickerModule} from '@angular/material/datepicker'; 
+import {MatNativeDateModule} from '@angular/material/core';
 
 @Component({
   selector: 'app-appointment-form',
   standalone: true, // Composant autonome
-  imports: [CommonModule, FormsModule], 
+  imports: [CommonModule, FormsModule, MatCardModule, MatFormFieldModule, MatInputModule, MatDatepickerModule, MatNativeDateModule], 
   templateUrl: './appointment-form.component.html',
   styleUrls: ['./appointment-form.component.scss'],
 })
+
 export class AppointmentFormComponent {
   selectedCenter: { name: string; address: string } | null = null; // Défaut à null
   formData = {
@@ -17,6 +23,7 @@ export class AppointmentFormComponent {
     lastName: '',
     email: '',
     date: '',
+    time: ''
   };
   constructor(private router: Router) {
     this.selectedCenter = history.state.center || null;
