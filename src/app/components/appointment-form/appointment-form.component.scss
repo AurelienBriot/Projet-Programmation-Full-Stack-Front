@@ -14,21 +14,21 @@ label {
   margin: 10px 0 5px;
 }
 
-button {
-  display: block;
-  margin: 20px auto 0;
-  padding: 10px 20px;
-  background-color: #27ae60;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  font-size: 16px;
-  cursor: pointer;
+// button {
+//   display: block;
+//   margin: 20px auto 0;
+//   padding: 10px 20px;
+//   background-color: #27ae60;
+//   color: white;
+//   border: none;
+//   border-radius: 5px;
+//   font-size: 16px;
+//   cursor: pointer;
 
-  &:hover {
-    background-color: #1e8449;
-  }
-}
+//   &:hover {
+//     background-color: #1e8449;
+//   }
+// }
 
 .selected-center {
   margin: 20px auto;
@@ -78,5 +78,8 @@ button {
 .mat-form-field {
   width: 100%;
 }
-  
+
+.error {
+  color: red;
+}
   

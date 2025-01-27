@@ -7,11 +7,12 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatDatepickerModule} from '@angular/material/datepicker'; 
 import {MatNativeDateModule} from '@angular/material/core';
+import {MatButtonModule} from '@angular/material/button'; 
 
 @Component({
   selector: 'app-appointment-form',
   standalone: true, // Composant autonome
-  imports: [CommonModule, FormsModule, MatCardModule, MatFormFieldModule, MatInputModule, MatDatepickerModule, MatNativeDateModule], 
+  imports: [CommonModule, FormsModule, MatCardModule, MatFormFieldModule, MatInputModule, MatDatepickerModule, MatNativeDateModule, MatButtonModule], 
   templateUrl: './appointment-form.component.html',
   styleUrls: ['./appointment-form.component.scss'],
 })
