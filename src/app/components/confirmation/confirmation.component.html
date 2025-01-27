@@ -1,10 +1,14 @@
 <div>
-    <h1>Votre réservation a bien été prise en compte</h1>
-    <p>Merci pour votre prise de rendez-vous.</p>
-  
-    <!-- Conteneur pour centrer le bouton -->
-    <div class="button-container">
-      <button (click)="makeNewReservation()">Nouvelle réservation</button>
-    </div>
-  </div>
+    <h1>Prise de rendez-vous vaccination</h1>
+
+    <mat-card class="confirmed">
+      <mat-card-title>Confirmation de prise de rendez-vous</mat-card-title>
+      <mat-card-content>
+        <p>Votre prise de rendez-vous a bien été prise en compte.</p>
+        <br>
+        <button mat-flat-button (click)="makeNewReservation()">Nouvelle réservation</button>
+      </mat-card-content>
+    </mat-card>
+    
+</div>
   
