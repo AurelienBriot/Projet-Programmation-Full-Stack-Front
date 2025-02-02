@@ -73,6 +73,7 @@
               "buildTarget": "Projet-Programmation-Full-Stack-Front:build:production"
             },
             "development": {
+              "proxyConfig": "./src/proxy.conf.json",
               "buildTarget": "Projet-Programmation-Full-Stack-Front:build:development"
             }
           },

@@ -3,11 +3,13 @@
   
     <!-- Champ de saisie pour la ville -->
     <mat-form-field class="barre-recherche">
-      <mat-label>Recherche un centre</mat-label>
+      <mat-label>Rechercher un centre</mat-label>
       <input matInput
         type="text"
         [(ngModel)]="city"
-        (input)="filterCenters()" 
+        (input)="filterCenters()"
+        placeholder="Entrez le nom d'une ville"
+
       />
     </mat-form-field>
     
@@ -15,8 +17,10 @@
     <!-- Liste des centres disponibles -->
     <div *ngIf="city && filteredCenters.length > 0; else noResults">
       <div *ngFor="let center of filteredCenters" class="center-card">
-        <p><strong>{{ center.name }}</strong></p>
-        <p>{{ center.address }}</p>
+        <p><strong>{{ center.nom }}</strong></p>
+        <p>{{ center.adresse }}
+          <br>
+        {{ center.codePostal }} {{ center.ville }}</p>
         <div>
             <button mat-flat-button (click)="chooseCenter(center)">Choisir</button>
           </div>
