@@ -13,7 +13,6 @@
         [(ngModel)]="city"
         (input)="filterCenters()"
         placeholder="Entrez le nom d'une ville"
-
       />
     </mat-form-field>
     
@@ -30,9 +29,9 @@
           </div>
       </div>
     </div>
-  </div>
-
-
-  <p *ngIf="searchPerformed && filteredCenters.length === 0" class="no-results">Aucun centre trouvé.</p>
+    
+  <ng-template #noResults>
+    <p *ngIf="city">Aucun centre trouvé pour cette ville.</p>
+  </ng-template>
 </div>
 
