@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import {MatFormFieldModule} from '@angular/material/form-field'; 
 import {MatInputModule} from '@angular/material/input';
@@ -10,7 +11,7 @@ import { SearchCenterService } from 'app/search-center.service';
 @Component({
   selector: 'app-search-center',
   standalone: true,
-  imports: [CommonModule, FormsModule, MatButtonModule, MatFormFieldModule, MatInputModule],
+  imports: [CommonModule, MatFormFieldModule, MatInputModule, MatButtonModule, FormsModule],
   templateUrl: './search-center.component.html',
   styleUrls: ['./search-center.component.scss'],
 })
@@ -24,7 +25,6 @@ export class SearchCenterComponent {
 
   constructor(private service: SearchCenterService, private router: Router) {}
 
-  // Filtrer les centres par ville
   filterCenters() {
     // this.filteredCenters = this.centers.filter((center) =>
     //   center.city.toLowerCase().includes(this.city.toLowerCase())
@@ -33,7 +33,12 @@ export class SearchCenterComponent {
       this.filteredCenters = resultCentres;
     })
   }
+
   chooseCenter(center: any) {
-    this.router.navigate(['/appointment'], { state: { center } });
+    this.router.navigate(['/appointment'], { state: { selectedCenter: center } });
+  }
+
+  goToLogin() {
+    this.router.navigate(['/login']); // Navigate to the login page
   }
 }
