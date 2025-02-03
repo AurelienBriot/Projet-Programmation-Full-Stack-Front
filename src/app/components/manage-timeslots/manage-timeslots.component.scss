@@ -1,0 +1,78 @@
+.table-container {
+    max-width: 80%;
+    margin: 10px auto;
+    padding: 15px;
+    background-color: #fff;
+    border-radius: 8px;
+    margin-top: 0px;
+  }
+  
+  .styled-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  .styled-table th {
+    background-color: #2c3e50;
+    color: white;
+    font-weight: bold;
+    padding: 12px;
+    text-align: left;
+  }
+  
+  .styled-table td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .styled-table tr:nth-child(even) {
+    background-color: #f8f9fa;
+  }
+  
+  .search-bar {
+    width: 100%;
+    max-width: 600px;
+    margin-bottom: 5px;
+  }
+  button {
+    padding: 8px 12px;
+    font-size: 14px;
+    border-radius: 5px;
+  }
+  
+  button.mat-primary {
+    background-color: #2c3e50;
+    color: white;
+  }
+  
+  button.mat-primary:hover {
+    background-color: #3a79a2;
+  }
+  
+  button.mat-warn {
+    background-color: #e74c3c;
+    color: white;
+  }
+  
+  button.mat-warn:hover {
+    background-color: #c0392b;
+  }
+  
+  .validated {
+    color: green;
+    font-weight: bold;
+  }
+  
+  .pending {
+    color: red;
+    font-weight: bold;
+  }
+  
+  .action-buttons {
+    display: flex;
+    gap: 15px; 
+  }
+  
