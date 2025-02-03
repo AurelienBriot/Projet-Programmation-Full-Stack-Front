@@ -1,73 +1,46 @@
-<div>
-    <h1>Prise de rendez-vous vaccination</h1>
-    <mat-card class="selected-center">
-      <mat-card-title class="selected-center-title">Centre sélectionné</mat-card-title>
-      <mat-card-content>
-        <p><strong>Nom :</strong> {{ selectedCenter?.name }}</p>
-        <p><strong>Adresse :</strong> {{ selectedCenter?.address }}</p>
-      </mat-card-content>
-        
-    </mat-card>
-    
-    <mat-card class="personnal-info">
-      <mat-card-title class="personnal-info-title">Informations personnelles</mat-card-title>
-      <mat-card-content>
-        <form #form="ngForm" (ngSubmit)="submit(form)" class="appointment-form">
-            <mat-form-field class="input">
-              <mat-label for="firstName">Prénom</mat-label>
-              <input matInput
-                id="firstName" 
-                [(ngModel)]="formData.firstName" 
-                name="firstName" 
-                required 
-              />
-            </mat-form-field>
-            <br>
-            <mat-form-field class="input">
-              <mat-label for="lastName">Nom</mat-label>
-              <input matInput
-                id="lastName" 
-                [(ngModel)]="formData.lastName" 
-                name="lastName" 
-                required 
-              />
-            </mat-form-field>
-            <br>
+<div class="appointment-container">
+  <h1>PRISE DE RENDEZ-VOUS</h1>
 
-            <mat-form-field class="input">
-              <mat-label for="email">Email</mat-label>
-              <input matInput
-                id="email" 
-                [(ngModel)]="formData.email" 
-                name="email" 
-                type="email"
-                required 
-              />
-            </mat-form-field>
-            
-            <mat-form-field class="input">
-              <mat-label for="date">Date du rendez-vous</mat-label>
-              <input matInput [matDatepicker]="picker"
-                id="date" 
-                [(ngModel)]="formData.date" 
-                name="date" 
-                required 
-              />
-              <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-              <mat-datepicker #picker></mat-datepicker>
-            </mat-form-field>
-          
-            <div *ngIf="form.submitted && !form.valid" class="error">
-              Vous n'avez pas rempli toutes les informations.
-            </div>
-          
-            <br>
-            
-            <button mat-flat-button type="submit">Réserver</button>
-          </form>
+  <mat-card class="selected-center">
+    <h2>Centre sélectionné</h2>
+    <p><strong>Nom :</strong> {{ selectedCenter?.name }}</p>
+    <p><strong>Adresse :</strong> {{ selectedCenter?.address }}</p>
+  </mat-card>
 
-      </mat-card-content>
-      </mat-card>
-    
-  </div>
-  
+  <mat-card class="reservation-form">
+    <h2>Formulaire de réservation</h2>
+
+    <form (ngSubmit)="submitAppointment()">
+      <mat-form-field appearance="outline">
+        <mat-label>Prénom</mat-label>
+        <input matInput [(ngModel)]="formData.firstName" name="firstName" required>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Nom</mat-label>
+        <input matInput [(ngModel)]="formData.lastName" name="lastName" required>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput [(ngModel)]="formData.email" name="email" type="email" required>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Date</mat-label>
+        <input matInput [matDatepicker]="picker" [(ngModel)]="formData.date" name="date" required>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Heure</mat-label>
+        <input matInput [(ngModel)]="formData.time" name="time" type="time" required>
+      </mat-form-field>
+
+      <div class="button-container">
+        <button mat-flat-button color="primary" type="submit">Réserver</button>
+      </div>
+    </form>
+  </mat-card>
+</div>

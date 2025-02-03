@@ -1,14 +1,17 @@
-<div>
-    <h1>Prise de rendez-vous vaccination</h1>
-
-    <mat-card class="confirmed">
-      <mat-card-title>Confirmation de prise de rendez-vous</mat-card-title>
-      <mat-card-content>
-        <p>Votre prise de rendez-vous a bien été prise en compte.</p>
-        <br>
-        <button mat-flat-button (click)="makeNewReservation()">Nouvelle réservation</button>
-      </mat-card-content>
-    </mat-card>
-    
+<div class="confirmation-container">
+  <mat-card class="confirmation-card">
+    <mat-card-title>✅ Votre rendez-vous a été confirmé !</mat-card-title>
+    <mat-card-content class="confirmation-details">
+      <p class="center"><strong>Centre :</strong> {{ reservationDetails.center.name }}</p>
+      <p class="address"><strong>Adresse :</strong> {{ reservationDetails.center.address }}</p>
+      <p class="first-name"><strong>Prénom :</strong> {{ reservationDetails.firstName }}</p>
+      <p class="last-name"><strong>Nom :</strong> {{ reservationDetails.lastName }}</p>
+      <p class="email"><strong>Email :</strong> {{ reservationDetails.email }}</p>
+      <p class="date"><strong>Date :</strong> {{ reservationDetails.date }}</p>
+      <p class="time"><strong>Heure :</strong> {{ reservationDetails.time }}</p>
+    </mat-card-content>
+    <button mat-flat-button (click)="makeNewReservation()" class="new-reservation-button">
+      Nouvelle réservation
+    </button>
+  </mat-card>
 </div>
-  

@@ -1,19 +1,21 @@
-h1 {
-    text-align: center;
-    color: #2c3e50;
-    margin-bottom: 20px;
-  }
+//h1 {
+//    text-align: center;
+//    color: #2c3e50;
+//    margin-bottom: 20px;
+//    font-size: 45px;
+//    margin-top: 100px;
+//  }
 
-.page {
-  text-align: center;
-}
+//.page {
+//  text-align: center;
+//}
 
-.barre-recherche {
-  width: 40%;
-}
-.mat-form-field {
-  width: 100%;
-}
+//.barre-recherche {
+//  width: 40%;
+//}
+//.mat-form-field {
+//  width: 100%;
+//}
 
   // input[type='text'] {
   //   width: 40%;
@@ -45,7 +47,7 @@ h1 {
   
   .button-container {
     display: flex;
-    justify-content: flex-end; /* Aligne le bouton à droite */
+    justify-content: flex-end; 
   }
   
   // button {
@@ -61,5 +63,30 @@ h1 {
   //     background-color: #2980b9;
   //   }
   // }
+
+  .admin-login {
+    position: absolute; 
+    top: 20px; 
+    right: 20px; 
+    z-index: 10; 
+  
+    button {
+      padding: 10px 10px;
+      background-color: #2c3e50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: bold;
+  
+      &:hover {
+        background-color: #3a79a2;
+      }
+    }
+    
+    
+  }
+  
   
   

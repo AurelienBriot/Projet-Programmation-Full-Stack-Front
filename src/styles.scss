@@ -1,4 +1,148 @@
-/* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.page {
+    text-align: center;
+    margin-top: 100px;
+  }
+  
+  .barre-recherche {
+    width: 40%;
+  }
+  
+  .mat-form-field {
+    width: 100%;
+  }
+  
+  .center-card {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    margin: auto;
+    background-color: #f9f9f9;
+    max-width: 400px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    margin-bottom: 1%;
+  }
+  
+  .center-card p {
+    margin: 5px 0;
+  }
+  
+  .button-container {
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  .admin-login {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 10;
+  }
+  
+  .admin-login button {
+    padding: 10px 10px;
+    background-color: #2c3e50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: bold;
+  }
+  
+  .admin-login button:hover {
+    background-color: #3a79a2;
+  }
+  
+  
+.page-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+  color: #2c3e50;
+  font-size: 60px !important;
+  margin-top: 20px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+
+h2 {
+  font-size: 20px !important;
+  font-weight: 500 !important;
+  color: #34495e !important;
+  text-align: center !important;
+  margin-bottom: 10px !important;
+}
+
+.selected-center {
+  text-align: center;
+  max-width: 450px;
+  background-color: #f5f5f5;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.reservation-form {
+  background-color: #f5f5f5;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: 45%;
+  max-width: 450px;
+}
+
+mat-form-field {
+  width: 100%;
+  display: block;
+  margin-bottom: 15px;
+}
+
+.styled-button {
+  padding: 10px 10px;
+  background-color: #2c3e50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.styled-button:hover {
+  background-color: #3a79a2;
+}
+
+.styled-button {
+  background-color: #2c3e50 !important;
+}
+.button-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px; 
+}
+
+
+.validated {
+  color: green;
+  font-weight: bold;
+}
+
+.pending {
+  color: red;
+  font-weight: bold;
+}
+

@@ -1,41 +1,42 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import {MatFormFieldModule} from '@angular/material/form-field'; 
-import {MatInputModule} from '@angular/material/input';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-search-center',
   standalone: true,
-  imports: [CommonModule, FormsModule, MatButtonModule, MatFormFieldModule, MatInputModule],
+  imports: [CommonModule, MatFormFieldModule, MatInputModule, MatButtonModule, FormsModule],
   templateUrl: './search-center.component.html',
   styleUrls: ['./search-center.component.scss'],
 })
 export class SearchCenterComponent {
-  city: string = ''; // Ville saisie par l'utilisateur
-
-  // Liste complète des centres
-  centers: { name: string; address: string; city: string }[] = [
-    { name: 'CH Narbonne', address: 'Boulevard Dr Lacroix, 11100 Narbonne', city: 'Narbonne' },
-    { name: 'Nancy - Tour Marcel Brot', address: '1, Rue Joseph Cugnot, 54000 Nancy', city: 'Nancy' },
-    { name: 'Centre Lyon Part-Dieu', address: 'Place Charles Béraudier, 69003 Lyon', city: 'Lyon' },
-    { name: 'CHU Bordeaux', address: 'Rue Dubernat, 33400 Bordeaux', city: 'Bordeaux' },
+  city: string = '';
+  centers = [
+    { name: 'Nancy - Tour Marcel Brot', address: '1, Rue Joseph Cugnot, 54000 Nancy' },
+    { name: 'Lyon - Centre Médical', address: '10, Rue de la République, 69001 Lyon' },
   ];
-
-  // Liste des centres filtrés
-  filteredCenters: { name: string; address: string; city: string }[] = [];
+  filteredCenters: any[] = [];
+  searchPerformed: boolean = false; 
 
   constructor(private router: Router) {}
 
-  // Filtrer les centres par ville
   filterCenters() {
-    this.filteredCenters = this.centers.filter((center) =>
-      center.city.toLowerCase().includes(this.city.toLowerCase())
-    );
+    const query = this.city.trim().toLowerCase();
+    this.searchPerformed = query.length > 0; 
+    this.filteredCenters = query
+      ? this.centers.filter((center) => center.name.toLowerCase().includes(query))
+      : [];
   }
+
   chooseCenter(center: any) {
-    this.router.navigate(['/appointment'], { state: { center } });
+    this.router.navigate(['/appointment'], { state: { selectedCenter: center } });
+  }
+
+  goToLogin() {
+    this.router.navigate(['/login']); // Navigate to the login page
   }
 }

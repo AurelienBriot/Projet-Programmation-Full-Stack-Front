@@ -1,23 +1,45 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { Component } from '@angular/core';
+import { DatePipe, CommonModule } from '@angular/common';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
-import { ConfirmationComponent } from './confirmation.component';
+@Component({
+  selector: 'app-confirmation',
+  templateUrl: './confirmation.component.html',
+  styleUrls: ['./confirmation.component.scss'],
+  standalone: true,
+  imports: [CommonModule, MatCardModule, MatButtonModule, MatIconModule, DatePipe]
+})
+export class ConfirmationComponent {
+  reservationDetails: any;
 
-describe('ConfirmationComponent', () => {
-  let component: ConfirmationComponent;
-  let fixture: ComponentFixture<ConfirmationComponent>;
+  constructor(private datePipe: DatePipe) {
+    const state = history.state;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [ConfirmationComponent]
-    })
-    .compileComponents();
+    console.log("Données reçues sur la page Confirmation :", state.formData);
 
-    fixture = TestBed.createComponent(ConfirmationComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    this.reservationDetails = {
+      firstName: state.formData?.firstName || '',
+      lastName: state.formData?.lastName || '',
+      email: state.formData?.email || '',
+      date: this.formatDate(state.formData?.date),
+      time: this.formatTime(state.formData?.time),
+      center: state.center || { name: '', address: '' },
+    };
+  }
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+  formatDate(date: string | undefined): string {
+    if (!date) return '';
+    return this.datePipe.transform(new Date(date), 'EEEE d MMMM yyyy', 'fr-FR') || '';
+  }
+
+  formatTime(time: string | undefined): string {
+    if (!time) return '';
+    return this.datePipe.transform(`1970-01-01T${time}:00`, 'HH:mm', 'fr-FR') || '';
+  }
+
+  makeNewReservation() {
+    window.location.href = '/search';
+  }
+}
