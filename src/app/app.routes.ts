@@ -1,5 +1,4 @@
 import { Routes } from '@angular/router';
-import { AppComponent } from './app.component';
 import { SearchCenterComponent } from './components/search-center/search-center.component';
 import { LoginComponent } from './login/login.component';
 import { AppointmentFormComponent } from './components/appointment-form/appointment-form.component';
@@ -9,8 +8,7 @@ import { ManageCentersComponent } from './admin/manage-centers/manage-centers.co
 import { ManageUsersComponent } from './admin/manage-users/manage-users.component';
 import { AuthGuard } from './auth-guard.service';
 import { ManagePlanningComponent } from './admin/manage-planning/manage-planning.component';
-
-
+import { MyCenterComponent } from './admin/my-center/my-center.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'search', pathMatch: 'full' },
@@ -19,16 +17,14 @@ export const routes: Routes = [
   { path: 'confirmation', component: ConfirmationComponent },
   { path: 'login', component: LoginComponent },
   {
-   
-  path: 'admin',
-  component: AdminDashboardComponent, // Assurez-vous que AdminDashboardComponent est défini ici
-  canActivate: [AuthGuard],
-  children: [
-    { path: 'centers', component: ManageCentersComponent },
-    { path: 'users', component: ManageUsersComponent },
-    { path: 'planning', component: ManagePlanningComponent}
+    path: 'admin',
+    component: AdminDashboardComponent,
+    canActivate: [AuthGuard],
+    children: [
+      { path: 'centers', component: ManageCentersComponent },
+      { path: 'users', component: ManageUsersComponent },
+      { path: 'planning', component: ManagePlanningComponent },
+      { path: 'my-center', component: MyCenterComponent },  
     ],
-  },
-  { path: '', redirectTo: '/admin', pathMatch: 'full' },
+  }
 ];
-
