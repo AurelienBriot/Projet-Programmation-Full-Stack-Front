@@ -6,10 +6,10 @@
     <mat-label>Rechercher un centre</mat-label>
     <input matInput [(ngModel)]="searchQuery" (input)="filterData()" placeholder="Rechercher un centre">
   </mat-form-field>
--->
+
   <!-- Centers Table -->
-  <table mat-table [dataSource]="filteredCenters" class="styled-table mat-elevation-z8">
-    
+  <table mat-table [dataSource]="dataSource" class="styled-table mat-elevation-z8">
+
     <!-- Name Column -->
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef> Nom </th>
@@ -20,6 +20,18 @@
     <ng-container matColumnDef="address">
       <th mat-header-cell *matHeaderCellDef> Adresse </th>
       <td mat-cell *matCellDef="let center"> {{ center.address }} </td>
+    </ng-container>
+
+    <!-- Postal Code Column -->
+    <ng-container matColumnDef="postalCode">
+      <th mat-header-cell *matHeaderCellDef> Code Postal </th>
+      <td mat-cell *matCellDef="let center"> {{ center.postalCode }} </td>
+    </ng-container>
+
+    <!-- City Column -->
+    <ng-container matColumnDef="city">
+      <th mat-header-cell *matHeaderCellDef> Ville </th>
+      <td mat-cell *matCellDef="let center"> {{ center.city }} </td>
     </ng-container>
 
     <!-- Actions Column -->
@@ -34,10 +46,10 @@
     </ng-container>
 
     <!-- Table Header & Rows -->
-    <tr mat-header-row *matHeaderRowDef="['name', 'address', 'actions']"></tr>
-    <tr mat-row *matRowDef="let row; columns: ['name', 'address', 'actions'];"></tr>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
 
   <!-- Add Center Button -->
-  <button mat-flat-button class="add-button" (click)="addCenter()">Ajouter un Centre</button>
+  <button mat-flat-button class="add-button" (click)="openAddCenterDialog()">Ajouter un Centre</button>
 </div>

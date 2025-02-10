@@ -22,21 +22,45 @@
 </div>
 -->
 
+<!--<div class="admin-container">
+  <h1>Tableau de bord administrateur</h1>
+  <nav>
+    <ul>
+      <li><a (click)="navigateTo('centers')">Gérer les centres</a></li>
+      <li><a (click)="navigateTo('users')">Gérer les utilisateurs</a></li>
+    </ul>
+  </nav>
+  <router-outlet></router-outlet>
+</div>
+-->
+
+<!--<div class="page">
+  <h1>Tableau de bord administrateur</h1>
+  <nav>
+    <ul>
+      <li><a (click)="navigateTo('centers')">Gérer les centres</a></li>
+      <li><a (click)="navigateTo('users')">Gérer les utilisateurs</a></li>
+    </ul>
+  </nav>
+  <router-outlet></router-outlet>
+</div>
+-->
+
 <div class="admin-container">
   <div class="header">
   <h1>TABLEAU DE BORD ADMINISTRATEUR</h1>
 
   <nav class="menu">
     <ul>
-      <li><a (click)="navigateTo('centers')">Gérer les centres</a></li>
-      <li><a (click)="navigateTo('users')">Gérer les utilisateurs</a></li>
-      <li><a (click)="navigateTo('planning')">Gérer le planning</a></li>
+      <li><a (click)="navigateTo('centers')">Centres</a></li>
+      <li><a (click)="navigateTo('super-admins')">Super Admins</a></li>
+      <li><a (click)="navigateTo('planning')">Planning</a></li>
       <li><a (click)="navigateTo('my-center')">Mon Centre</a></li>
       <li><a (click)="navigateTo('search')">Espace réservation</a></li>
     </ul>
   </nav>
 </div>
-
   <router-outlet></router-outlet>
 </div>
+
 

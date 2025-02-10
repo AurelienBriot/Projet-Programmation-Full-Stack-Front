@@ -1,3 +1,5 @@
+<link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;700&display=swap" rel="stylesheet">
+
 <div class="admin-login">
   <button (click)="goToLogin()">Espace Administrateur</button>
 </div>
@@ -9,6 +11,10 @@
     <mat-label>Rechercher un centre</mat-label>
     <input matInput [(ngModel)]="city" (input)="filterCenters()">
   </mat-form-field>  
+  
+  <div class="image-container">
+    <img src="/vacci.jpg" alt="Vaccination Image" class="vacci-image">
+  </div>
 
   <div *ngIf="filteredCenters.length > 0">
     <div *ngFor="let center of filteredCenters" class="center-card">

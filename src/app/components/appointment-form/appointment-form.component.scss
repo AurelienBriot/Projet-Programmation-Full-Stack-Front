@@ -2,3 +2,49 @@
 .page-container {
   margin-top: 10px;
 }
+
+.appointment-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  text-align: center;
+}
+
+.selected-center,
+.reservation-form {
+  width: 50%;
+  max-width: 400px;
+  margin-bottom: 20px;
+}
+
+.selected-center p strong {
+  color: #27d208; 
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+}
+
+.button-container {
+  display: flex;
+  gap: 15px; 
+}
+
+button {
+  padding: 10px 15px;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button[color="warn"] {
+  background-color: #d32f2f !important; 
+  color: white !important;
+}
+
+button[color="warn"]:hover {
+  background-color: #b71c1c !important; 
+}

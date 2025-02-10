@@ -70,4 +70,7 @@ export class AppointmentFormComponent implements OnInit {
     // Navigate to confirmation
     this.router.navigate(['/confirmation'], { state: { appointment: newAppointment } });
   }
+  cancel() {
+    this.router.navigate(['/search']); 
+  }
 }
