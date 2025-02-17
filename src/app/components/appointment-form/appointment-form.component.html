@@ -110,16 +110,10 @@
               
             </mat-form-field>
 
-            <div *ngIf="form.submitted && !form.valid" class="error">
-              Vous n'avez pas rempli toutes les informations.
-            </div>
-          
-            <br>
-          
-            <button mat-flat-button type="submit">Réserver</button>
-          
-          </mat-card-content>
-        </mat-card>
+      <div class="button-container">
+        <button mat-flat-button color="primary" type="submit">Réserver</button>
+        <button mat-flat-button color="warn" type="button" (click)="cancel()">Annuler</button>
+      </div>
     </form>
   </div>
   

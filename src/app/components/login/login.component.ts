@@ -23,4 +23,7 @@ export class LoginComponent {
       alert('Nom d’utilisateur ou mot de passe incorrect');
     }
   }
+  goToSearch() {
+    this.router.navigate(['/search']); 
+  }
 }

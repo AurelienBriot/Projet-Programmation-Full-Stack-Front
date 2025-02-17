@@ -54,7 +54,7 @@ export class AppointmentFormComponent {
     }
   }
 
-  // submitAppointment() {
+  submitAppointment() {
   //   if (!this.selectedCenter.name || !this.formData.firstName || !this.formData.lastName || !this.formData.email || !this.formData.date || !this.formData.time) {
   //     alert("Veuillez remplir tous les champs obligatoires.");
   //     return;
@@ -78,6 +78,9 @@ export class AppointmentFormComponent {
   //   console.log("Appointment saved:", newAppointment);
 
   //   // Navigate to confirmation
-  //   this.router.navigate(['/confirmation'], { state: { appointment: newAppointment } });
-  // }
+     this.router.navigate(['/confirmation'], { state: { appointment: newAppointment } });
+  }
+  cancel() {
+    this.router.navigate(['/search']); 
+  }
 }

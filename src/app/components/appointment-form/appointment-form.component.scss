@@ -1,85 +1,50 @@
-h1 {
-    text-align: center;
-    color: #34495e;
-    margin-bottom: 20px;
-  }
-  
-form {
-  width: auto;
+
+.page-container {
+  margin-top: 10px;
 }
 
-label {
-  display: block;
+.appointment-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  text-align: center;
+}
+
+.selected-center,
+.reservation-form {
+  width: 50%;
+  max-width: 400px;
+  margin-bottom: 20px;
+}
+
+.selected-center p strong {
+  color: #27d208; 
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+}
+
+.button-container {
+  display: flex;
+  gap: 15px; 
+}
+
+button {
+  padding: 10px 15px;
   font-weight: bold;
-  margin: 10px 0 5px;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
-// button {
-//   display: block;
-//   margin: 20px auto 0;
-//   padding: 10px 20px;
-//   background-color: #27ae60;
-//   color: white;
-//   border: none;
-//   border-radius: 5px;
-//   font-size: 16px;
-//   cursor: pointer;
-
-//   &:hover {
-//     background-color: #1e8449;
-//   }
-// }
-
-.selected-center {
-  margin: 20px auto;
-  padding: 20px;
-  // border: 1px solid #ccc;
-  // border-radius: 8px;
-  background-color: #f9f9f9;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  max-width: 30%;
-  text-align: center;
+button[color="warn"] {
+  background-color: #d32f2f !important; 
+  color: white !important;
 }
 
-.personnal-info, .appointment-info {
-  margin: 20px auto;
-  padding: 20px;
-  // border: 1px solid #ccc;
-  // border-radius: 8px;
-  background-color: #f9f9f9;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  max-width: 40%;
-  text-align: center;
+button[color="warn"]:hover {
+  background-color: #b71c1c !important; 
 }
-
-.selected-center-title, .personnal-info-title {
-  color: #299fee;
-  font-size: 24px;
-  margin-bottom: 10px;
-}
-
-.selected-center p {
-  font-size: 18px;
-  color: #34495e;
-  margin: 5px 0;
-}
-
-.informative-text {
-  font-size: 16px;
-  color: #34495e;
-  margin-top: 15px;
-  font-style: italic;
-}
-
-.input {
-  width: 70%;
-}
-
-.mat-form-field {
-  width: 100%;
-}
-
-.error {
-  color: red;
-}
-  
