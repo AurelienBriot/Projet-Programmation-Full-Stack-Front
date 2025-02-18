@@ -11,7 +11,7 @@ export class AppointmentService {
   constructor(private httpClient: HttpClient) { }
 
   getCreneauxByCentreAndDate(centre_id: number, date: string) : Observable<Creneau[]> {
-    return this.httpClient.get<Creneau[]>("/api/public/creneaux", {
+    return this.httpClient.get<Creneau[]>("/api/creneaux", {
      params: {
        "centre": centre_id,
        "date": date

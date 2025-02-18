@@ -31,8 +31,7 @@ export class SearchCenterComponent {
   }
 
   chooseCenter(center: any) {
-    localStorage.setItem('selectedCenter', JSON.stringify(center));
-    this.router.navigate(['/appointment']); 
+    this.router.navigate(['/appointment'], { state: { center } });
   }
 
   goToLogin() {

@@ -3,23 +3,16 @@
   margin-top: 10px;
 }
 
-.appointment-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
+.selected-center {
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 30%;
   text-align: center;
-}
-
-.selected-center,
-.reservation-form {
-  width: 50%;
-  max-width: 400px;
-  margin-bottom: 20px;
-}
-
-.selected-center p strong {
+  }
+  
+.selected-center p {
   color: #27d208; 
 }
 
@@ -47,4 +40,51 @@ button[color="warn"] {
 
 button[color="warn"]:hover {
   background-color: #b71c1c !important; 
+}
+
+form {
+width: auto;
+}
+
+label {
+display: block;
+font-weight: bold;
+margin: 10px 0 5px;
+}
+
+
+.personnal-info, .appointment-info {
+margin: 20px auto;
+padding: 20px;
+// border: 1px solid #ccc;
+// border-radius: 8px;
+background-color: #f9f9f9;
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+max-width: 40%;
+text-align: center;
+}
+
+.selected-center-title, .personnal-info-title, .appointment-info-title {
+color: #299fee;
+font-size: 24px;
+margin-bottom: 10px;
+}
+
+.informative-text {
+font-size: 16px;
+color: #34495e;
+margin-top: 15px;
+font-style: italic;
+}
+
+.input {
+width: 70%;
+}
+
+.mat-form-field {
+width: 100%;
+}
+
+.error {
+color: red;
 }

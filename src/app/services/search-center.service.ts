@@ -11,7 +11,7 @@ export class SearchCenterService {
   constructor(private httpClient: HttpClient) { }
 
   getAllCenters(ville: string) : Observable<Centre[]> {
-   return this.httpClient.get<Centre[]>("/api/public/centres", {
+   return this.httpClient.get<Centre[]>("/api/centres", {
     params: {
       "ville": ville
     }
