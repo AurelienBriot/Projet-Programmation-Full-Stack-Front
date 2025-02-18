@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Creneau } from './creneau';
+import { Creneau } from '../creneau';
 import { Observable } from 'rxjs/internal/Observable';
 
 @Injectable({

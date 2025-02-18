@@ -34,7 +34,7 @@ nav ul li {
   margin: 10px;
 }
 
-nav ul li a {
+a {
   text-decoration: none;
   padding: 10px 15px;
   background-color: #27d208;
@@ -45,7 +45,8 @@ nav ul li a {
   display: inline-block;
 }
 
-nav ul li a:hover {
+a:hover {
   background-color: #4bed2e;
 }
+
 

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
+import { LoginService } from 'app/services/login.service';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -12,7 +13,7 @@ import { MatButtonModule } from '@angular/material/button';
   styleUrls: ['./admin-dashboard.component.scss'],
 })
 export class AdminDashboardComponent {
-  constructor(private router: Router) {}
+  constructor(private router: Router, private loginService: LoginService) {}
 
   navigateTo(page: string) {
     if (page === 'search') {
@@ -20,5 +21,9 @@ export class AdminDashboardComponent {
     } else {
       this.router.navigate([`/admin/${page}`]); 
     }
+  }
+
+  logout() {
+    this.loginService.logout();
   }
 }

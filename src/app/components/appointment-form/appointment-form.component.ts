@@ -9,7 +9,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatButtonModule} from '@angular/material/button'; 
 import {MatSelectModule} from '@angular/material/select'; 
-import { AppointmentService } from 'app/appointment.service';
+import { AppointmentService } from 'app/services/appointment.service';
 import moment from 'moment';
 
 @Component({
@@ -78,7 +78,7 @@ export class AppointmentFormComponent {
   //   console.log("Appointment saved:", newAppointment);
 
   //   // Navigate to confirmation
-     this.router.navigate(['/confirmation'], { state: { appointment: newAppointment } });
+    //  this.router.navigate(['/confirmation'], { state: { appointment: newAppointment } });
   }
   cancel() {
     this.router.navigate(['/search']); 

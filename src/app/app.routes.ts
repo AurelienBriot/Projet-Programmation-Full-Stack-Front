@@ -3,10 +3,10 @@ import { SearchCenterComponent } from './components/search-center/search-center.
 import { LoginComponent } from './components/login/login.component';
 import { AppointmentFormComponent } from './components/appointment-form/appointment-form.component';
 import { ConfirmationComponent } from './components/confirmation/confirmation.component';
-import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
-import { ManageCentersComponent } from './admin/manage-centers/manage-centers.component';
+import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
+import { ManageCentersComponent } from './components/manage-centers/manage-centers.component';
 import { AuthGuard } from './auth-guard.service';
-import { ManagePlanningComponent } from './admin/manage-planning/manage-planning.component';
+import { ManagePlanningComponent } from './components/manage-planning/manage-planning.component';
 import { MyCenterComponent } from './admin/my-center/my-center.component';
 import { ManageSuperAdminsComponent } from './admin/manage-super-admins/manage-super-admins.component';
 
@@ -21,10 +21,10 @@ export const routes: Routes = [
     component: AdminDashboardComponent,
     canActivate: [AuthGuard],
     children: [
-      { path: 'centers', component: ManageCentersComponent },
-      { path: 'planning', component: ManagePlanningComponent },
-      { path: 'my-center', component: MyCenterComponent },  
-      {path: 'super-admins', component: ManageSuperAdminsComponent},
+      { path: 'centers', component: ManageCentersComponent, canActivate: [AuthGuard] },
+      { path: 'planning', component: ManagePlanningComponent, canActivate: [AuthGuard] },
+      { path: 'my-center', component: MyCenterComponent, canActivate: [AuthGuard] },  
+      {path: 'super-admins', component: ManageSuperAdminsComponent, canActivate: [AuthGuard]},
     ],
   }
 ];

@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field'; 
 import { MatInputModule } from '@angular/material/input';
-import { SearchCenterService } from 'app/search-center.service';
+import { SearchCenterService } from 'app/services/search-center.service';
 
 @Component({
   selector: 'app-search-center',
