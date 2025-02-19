@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, catchError, map, Observable, Subject, throwError } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { Utilisateur } from '../utilisateur';
+import { Utilisateur } from '../interfaces/utilisateur';
 
 @Injectable({
   providedIn: 'root'
@@ -61,7 +61,7 @@ export class LoginService {
       this.username = undefined;
     } 
     this.isLoggedSubject.next(false);
-    this.router.navigateByUrl("/login").then(console.log).catch(console.error)
+    this.router.navigateByUrl("/").then(console.log).catch(console.error)
   }
 
   getUtilisateur(): Observable<Utilisateur> {

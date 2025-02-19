@@ -2,13 +2,11 @@
   <mat-card class="confirmation-card">
     <mat-card-title>✅ Votre rendez-vous a été confirmé !</mat-card-title>
     <mat-card-content class="confirmation-details">
-      <p class="center"><strong>Centre :</strong> {{ reservationDetails.center.name }}</p>
-      <p class="address"><strong>Adresse :</strong> {{ reservationDetails.center.address }}</p>
-      <p class="first-name"><strong>Prénom :</strong> {{ reservationDetails.firstName }}</p>
-      <p class="last-name"><strong>Nom :</strong> {{ reservationDetails.lastName }}</p>
+      <p class="first-name"><strong>Prénom :</strong> {{ reservationDetails.prenom }}</p>
+      <p class="last-name"><strong>Nom :</strong> {{ reservationDetails.nom }}</p>
       <p class="email"><strong>Email :</strong> {{ reservationDetails.email }}</p>
-      <p class="date"><strong>Date :</strong> {{ reservationDetails.date }}</p>
-      <p class="time"><strong>Heure :</strong> {{ reservationDetails.time }}</p>
+      <p class="date"><strong>Date :</strong> {{ reservationDetails.creneau.date }}</p>
+      <p class="time"><strong>Heure :</strong> {{ reservationDetails.creneau.heure }}:{{ reservationDetails.creneau.minute !== 0 ? reservationDetails.creneau.minute : '00' }}</p>
     </mat-card-content>
     <button mat-flat-button (click)="makeNewReservation()" class="new-reservation-button">
       Nouvelle réservation

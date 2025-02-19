@@ -11,6 +11,10 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatSelectModule} from '@angular/material/select'; 
 import { AppointmentService } from 'app/services/appointment.service';
 import moment from 'moment';
+import { PatientService } from 'app/services/patient.service';
+import { Patient } from 'app/interfaces/patient';
+import { state } from '@angular/animations';
+import { app } from '../../../../server';
 
 @Component({
   selector: 'app-appointment-form',
@@ -23,34 +27,37 @@ import moment from 'moment';
 
 export class AppointmentFormComponent {
   selectedCenter: { id: number, nom: string; adresse: string; codePostal: string, ville: string  }; // Défaut à null
-  formData = {
-    firstName: '',
-    lastName: '',
-    address: '',
-    city: '',
-    email: '',
-    phone: '',
-    date: '',
-    creneau: ''
-  };
 
   creneaux: any | null ;
+  dateCreneau: any | null;
+  newPatient: Patient = {nom: "", prenom: "", adresse: "", ville: "", email: "", telephone: "", estVaccine: false };
 
-  constructor(private appointmentService: AppointmentService, private router: Router) {
+  constructor(private appointmentService: AppointmentService, private patientService: PatientService, private router: Router) {
     this.selectedCenter = history.state.center || null;
   }
 
   onDateChange(date: string) {
       const formattedDate = moment(date).format('YYYY-MM-DD');
-      this.creneaux = this.appointmentService.getCreneauxByCentreAndDate(this.selectedCenter.id, formattedDate).subscribe(creneaux => {
+      this.creneaux = this.appointmentService.getCreneauxByCentreAndDateAndEstReserve(this.selectedCenter.id, formattedDate, false).subscribe(creneaux => {
       this.creneaux = creneaux;
     });
   }
 
   submit(form: any) {
     if (form.valid) {
-      // Redirection vers la page de confirmation si le formulaire est valide
-      this.router.navigate(['/confirmation']);
+      if(this.newPatient.creneau !== undefined && this.newPatient.creneau.id !== undefined) {
+        this.patientService.createPatient(this.newPatient).subscribe({
+          next: (patient) => {
+            console.log('Patient ajouté :', patient);
+            this.appointmentService.addNewPatient(patient, this.newPatient.creneau!.id).subscribe({
+              next(creneau) {
+                  console.log('Créneau mis à jour :', creneau);
+              },
+            });
+          }
+        });
+        this.router.navigate(['/confirmation'], { state: { appointment: this.newPatient } });
+      }
     }
   }
 

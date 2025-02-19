@@ -3,6 +3,6 @@ export interface Creneau {
     date: Date,
     heure: number,
     minute: number,
-    
+    idPatient: number
 
 }

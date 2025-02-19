@@ -19,7 +19,7 @@
                 <mat-label for="firstName">Prénom</mat-label>
                 <input matInput
                   id="firstName" 
-                  [(ngModel)]="formData.firstName" 
+                  [(ngModel)]="newPatient.prenom" 
                   name="firstName" 
                   required 
                 />
@@ -29,7 +29,7 @@
                 <mat-label for="lastName">Nom</mat-label>
                 <input matInput
                   id="lastName" 
-                  [(ngModel)]="formData.lastName" 
+                  [(ngModel)]="newPatient.nom" 
                   name="lastName" 
                   required 
                 />
@@ -40,7 +40,7 @@
                 <mat-label for="address">Adresse</mat-label>
                 <input matInput
                   id="address" 
-                  [(ngModel)]="formData.address" 
+                  [(ngModel)]="newPatient.adresse" 
                   name="address" 
                   required 
                 />
@@ -51,7 +51,7 @@
                 <mat-label for="city">Ville</mat-label>
                 <input matInput
                   id="city" 
-                  [(ngModel)]="formData.city" 
+                  [(ngModel)]="newPatient.ville" 
                   name="city" 
                   required 
                 />
@@ -62,7 +62,7 @@
                 <mat-label for="email">Email</mat-label>
                 <input matInput
                   id="email" 
-                  [(ngModel)]="formData.email" 
+                  [(ngModel)]="newPatient.email" 
                   name="email" 
                   type="email"
                   required 
@@ -73,7 +73,7 @@
                 <mat-label for="phone">Téléphone</mat-label>
                 <input matInput
                   id="phone" 
-                  [(ngModel)]="formData.phone" 
+                  [(ngModel)]="newPatient.telephone" 
                   name="phone" 
                   type="tel"
                   required 
@@ -91,8 +91,8 @@
               <mat-label for="date">Date du rendez-vous</mat-label>
               <input matInput [matDatepicker]="picker"
                 id="date" 
-                [(ngModel)]="formData.date"
-                (dateChange)="onDateChange(formData.date)"
+                [(ngModel)]="dateCreneau"
+                (dateChange)="onDateChange(dateCreneau)"
                 name="date"
                 required 
               />
@@ -102,10 +102,8 @@
           
             <mat-form-field class="input">
               <mat-label for="creneau">Créneau</mat-label>
-              <mat-select> 
-                @for (creneau of creneaux; track creneau) {
-                  <mat-option [value]="creneau">Créneau de {{creneau.heure}}:{{creneau.minute !== 0 ? creneau.minute : '00'}}</mat-option>
-                }
+              <mat-select [(ngModel)]="newPatient.creneau" name="creneau"> 
+                  <mat-option *ngFor="let creneau of creneaux" [value]="creneau">Créneau de {{ creneau.heure }}:{{ creneau.minute !== 0 ? creneau.minute : '00' }}</mat-option>
               </mat-select>
               
             </mat-form-field>

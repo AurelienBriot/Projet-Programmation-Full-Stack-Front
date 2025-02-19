@@ -1,5 +1,7 @@
+import { Creneau } from "./creneau"
+
 export interface Patient {
-    id: number,
+    id?: number,
     nom: string,
     prenom: string,
     adresse: string,
@@ -7,4 +9,5 @@ export interface Patient {
     email: string,
     telephone: string,
     estVaccine: boolean
+    creneau?: Creneau
 }
