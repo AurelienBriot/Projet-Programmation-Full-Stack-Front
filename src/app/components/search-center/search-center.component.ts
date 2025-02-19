@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field'; 
 import { MatInputModule } from '@angular/material/input';
-import { SearchCenterService } from 'app/services/search-center.service';
+import { CentreService } from 'app/services/centre.service';
 
 @Component({
   selector: 'app-search-center',
@@ -20,12 +20,13 @@ export class SearchCenterComponent {
   // Liste complète des centres
 
   // Liste des centres filtrés
-  filteredCenters: { id: number, nom: string; adresse: string; codePostal: string, ville: string }[] = [];
+  filteredCenters: { id?: number, nom: string; adresse: string; codePostal: string, ville: string }[] = [];
 
-  constructor(private service: SearchCenterService, private router: Router) {}
+  constructor(private service: CentreService, private router: Router) {}
 
   filterCenters() {
-    this.service.getAllCenters(this.city).subscribe(resultCentres => {
+    this.service.
+    getAllCentresByVille(this.city).subscribe(resultCentres => {
       this.filteredCenters = resultCentres;
     })
   }

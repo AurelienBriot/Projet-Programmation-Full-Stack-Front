@@ -1,5 +1,5 @@
 export interface Centre {
-    id: number,
+    id?: number,
     nom: string,
     adresse: string,
     codePostal: string,

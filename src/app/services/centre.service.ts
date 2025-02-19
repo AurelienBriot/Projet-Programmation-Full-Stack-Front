@@ -6,16 +6,26 @@ import { Centre } from '../interfaces/centre';
 @Injectable({
   providedIn: 'root'
 })
-export class SearchCenterService {
+export class CentreService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getAllCenters(ville: string) : Observable<Centre[]> {
+  
+  getAllCentresByVille(ville: string) : Observable<Centre[]> {
    return this.httpClient.get<Centre[]>("/api/centres", {
     params: {
       "ville": ville
     }
    });
+  }
+
+  getAllCentres() : Observable<Centre[]> {
+    return this.httpClient.get<Centre[]>("/api/centres", {
+    });
+  }
+
+  addCentre(centre: Centre) : Observable<Centre> {
+    return this.httpClient.post<Centre>("/api/centre", centre);
   }
 
 }

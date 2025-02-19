@@ -8,6 +8,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
+import { CentreService } from 'app/services/centre.service';
+import { Centre } from 'app/interfaces/centre';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-manage-centers',
@@ -26,22 +29,41 @@ import { MatButtonModule } from '@angular/material/button';
   templateUrl: './manage-centers.component.html',
   styleUrls: ['./manage-centers.component.scss']
 })
+
+
 export class ManageCentersComponent {
   searchQuery: string = '';
+  
   displayedColumns: string[] = ['name', 'address', 'postalCode', 'city', 'actions'];
-  dataSource = new MatTableDataSource<{ name: string; address: string; postalCode: string; city: string }>();
-  centers: { name: string; address: string; postalCode: string; city: string }[] = [
-    { name: 'CH Narbonne', address: 'Boulevard Dr Lacroix', postalCode: '11000', city: 'Narbonne' }
-  ];
 
-  constructor(public dialog: MatDialog) {
-    this.dataSource.data = this.centers;
+  dataSource = new MatTableDataSource<{ nom: string; adresse: string; codePostal: string; ville: string }>();
+
+  constructor(public dialog: MatDialog, private centreService: CentreService) {
+    this.centreService.getAllCentres().subscribe(resultCentres => {
+      this.dataSource.data = this.mapCentres(resultCentres);
+    })
   }
 
-  filterData() {
-    this.dataSource.data = this.centers.filter(center =>
-      center.name.toLowerCase().includes(this.searchQuery.toLowerCase())
-    );
+  mapCentres(resultCentres: Centre[]) {
+    return resultCentres.map(centre => ({
+      nom: centre.nom,
+      adresse: centre.adresse,
+      codePostal: centre.codePostal,
+      ville: centre.ville
+    }));
+  }
+
+  filterCentres() {
+    if (this.searchQuery === '') {
+      this.centreService.getAllCentres().subscribe(resultCentres => {
+        this.dataSource.data = this.mapCentres(resultCentres);
+      })
+    }
+    else {
+      this.centreService.getAllCentresByVille(this.searchQuery).subscribe(resultCentres => {
+        this.dataSource.data = this.mapCentres(resultCentres);
+      })
+    }
   }
 
   openAddCenterDialog(): void {
@@ -58,37 +80,41 @@ export class ManageCentersComponent {
   }
 
   deleteCenter(center: any) {
-    console.log('Deleting center:', center);
-    this.centers = this.centers.filter(c => c !== center);
-    this.dataSource.data = this.centers;
+    // console.log('Deleting center:', center);
+    // this.centers = this.centers.filter(c => c !== center);
+    // this.dataSource.data = this.centers;
   }
 }
+
+// --------------------------
+// Fenêtre Ajouter un centre
+// --------------------------
 
 @Component({
   selector: 'app-add-center-dialog',
   template: `
     <div class="dialog-content">
       <h2>Ajouter un Centre</h2>
-      <form [formGroup]="centerForm">
+      <form #form="ngForm" (ngSubmit)="submit(form)">
         <mat-form-field appearance="outline">
           <mat-label>Nom</mat-label>
-          <input matInput formControlName="name">
+          <input matInput [(ngModel)]="newCentre.nom" name="nom" required>
         </mat-form-field>
         <mat-form-field appearance="outline">
           <mat-label>Adresse</mat-label>
-          <input matInput formControlName="address">
+          <input matInput [(ngModel)]="newCentre.adresse" name="adresse" required>
         </mat-form-field>
         <mat-form-field appearance="outline">
           <mat-label>Code postal</mat-label>
-          <input matInput formControlName="postalCode">
+          <input matInput [(ngModel)]="newCentre.codePostal" name="codePostal" required>
         </mat-form-field>
         <mat-form-field appearance="outline">
           <mat-label>Ville</mat-label>
-          <input matInput formControlName="city">
+          <input matInput [(ngModel)]="newCentre.ville" name="ville" required>
         </mat-form-field>
         <div class="dialog-actions">
           <button mat-button (click)="onCancel()">Annuler</button>
-          <button mat-flat-button color="primary" (click)="submitForm()">Ajouter</button>
+          <button mat-flat-button color="primary">Ajouter</button>
         </div>
       </form>
     </div>
@@ -109,20 +135,19 @@ export class ManageCentersComponent {
   imports: [CommonModule, FormsModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatButtonModule]
 })
 export class AddCenterDialog {
-  centerForm: FormGroup;
 
-  constructor(private fb: FormBuilder, public dialogRef: MatDialogRef<AddCenterDialog>) {
-    this.centerForm = this.fb.group({
-      name: ['', Validators.required],
-      address: ['', Validators.required],
-      postalCode: ['', Validators.required],
-      city: ['', Validators.required]
-    });
+  newCentre : Centre = { nom: "", adresse: "", codePostal: "", ville: "" };
+
+  constructor(private centreService: CentreService, public dialogRef: MatDialogRef<AddCenterDialog>) {
+    
   }
 
-  submitForm() {
-    if (this.centerForm.valid) {
-      console.log('New Center:', this.centerForm.value);
+  submit(form: any) {
+    if (form.valid) {
+      this.centreService.addCentre(this.newCentre).subscribe({
+        next: (centre) => {
+          console.log('Patient ajouté :', centre);
+        }});
       this.dialogRef.close();
     }
   }

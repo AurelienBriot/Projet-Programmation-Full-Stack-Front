@@ -61,32 +61,6 @@ export class AppointmentFormComponent {
     }
   }
 
-  submitAppointment() {
-  //   if (!this.selectedCenter.name || !this.formData.firstName || !this.formData.lastName || !this.formData.email || !this.formData.date || !this.formData.time) {
-  //     alert("Veuillez remplir tous les champs obligatoires.");
-  //     return;
-  //   }
-
-  //   const newAppointment = {
-  //     firstName: this.formData.firstName,
-  //     lastName: this.formData.lastName,
-  //     email: this.formData.email,
-  //     date: this.formData.date,
-  //     time: this.formData.time,
-  //     center: this.selectedCenter,
-  //     status: 'En attente',
-  //   };
-
-  //   // Save to localStorage
-  //   const existingAppointments = JSON.parse(localStorage.getItem('appointments') || '[]');
-  //   existingAppointments.push(newAppointment);
-  //   localStorage.setItem('appointments', JSON.stringify(existingAppointments));
-
-  //   console.log("Appointment saved:", newAppointment);
-
-  //   // Navigate to confirmation
-    //  this.router.navigate(['/confirmation'], { state: { appointment: newAppointment } });
-  }
   cancel() {
     this.router.navigate(['/search']); 
   }
