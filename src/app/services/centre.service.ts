@@ -28,4 +28,11 @@ export class CentreService {
     return this.httpClient.post<Centre>("/api/centre", centre);
   }
 
+  updateCentre( centre: Centre) : Observable<Centre> {
+    return this.httpClient.put<Centre>(`/api/centre/${centre.id}`, centre);
+  }
+
+  deleteCentre(id: number) : Observable<any> {
+    return this.httpClient.delete(`/api/centre/${id}`);
+  }
 }

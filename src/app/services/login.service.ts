@@ -52,6 +52,10 @@ export class LoginService {
     });
   }
 
+  hasRole(roleToTest: string): boolean {
+    return this.role === roleToTest;
+  }
+
   isLogged(): Observable<boolean> {
     console.log(this.isLoggedSubject.asObservable());
     return this.isLoggedSubject.asObservable();
@@ -71,7 +75,12 @@ export class LoginService {
       this.password = undefined;
       this.username = undefined;
     } 
+    
     this.isLoggedSubject.next(false);
+
+    this.role = "";
+    sessionStorage.removeItem('role');
+
     this.httpClient.post('/api/logout', {}).subscribe(() => {
       document.cookie = 'JSESSIONID=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT;';
       window.location.reload();

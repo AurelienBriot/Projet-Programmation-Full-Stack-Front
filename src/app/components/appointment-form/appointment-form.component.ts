@@ -13,8 +13,6 @@ import { AppointmentService } from 'app/services/appointment.service';
 import moment from 'moment';
 import { PatientService } from 'app/services/patient.service';
 import { Patient } from 'app/interfaces/patient';
-import { state } from '@angular/animations';
-import { app } from '../../../../server';
 
 @Component({
   selector: 'app-appointment-form',
