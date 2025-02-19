@@ -14,12 +14,14 @@ export class LoginService {
   private password?: string;
   private username?: string;
 
+  private role: string = "";
+
   constructor(private httpClient: HttpClient, private router: Router) {
   }
 
   connect(username: string, password: string): Observable<any> {
     let token = this.createToken(username, password);
-
+    
     let options = {
       headers: {
         'Authorization': token,
@@ -32,6 +34,8 @@ export class LoginService {
       // this.username = username;
       console.log("Connected");
       this.isLoggedSubject.next(true);
+      this.loadUserRoles();
+     
     }))
   }
 
@@ -40,8 +44,15 @@ export class LoginService {
     return token;
   } 
 
+  private loadUserRoles() {
+    this.httpClient.get<{ username: string, roles: string[] }>('/api/me').subscribe(response => {
+      this.role = response.roles[0];
+      console.log("Role : ", this.role);
+      sessionStorage.setItem('role', JSON.stringify(this.role));
+    });
+  }
+
   isLogged(): Observable<boolean> {
-    console.log("test isLogged")
     console.log(this.isLoggedSubject.asObservable());
     return this.isLoggedSubject.asObservable();
   }
@@ -61,10 +72,10 @@ export class LoginService {
       this.username = undefined;
     } 
     this.isLoggedSubject.next(false);
-    this.router.navigateByUrl("/").then(console.log).catch(console.error)
+    this.httpClient.post('/api/logout', {}).subscribe(() => {
+      document.cookie = 'JSESSIONID=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT;';
+      window.location.reload();
+    });
   }
 
-  getUtilisateur(): Observable<Utilisateur> {
-    return this.httpClient.get<Utilisateur>('/api/user', {});
-  }
 }
