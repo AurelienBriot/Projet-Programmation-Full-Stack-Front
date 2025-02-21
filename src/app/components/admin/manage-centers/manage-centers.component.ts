@@ -38,13 +38,17 @@ export class ManageCentersComponent {
   dataSource = new MatTableDataSource<{ nom: string; adresse: string; codePostal: string; ville: string }>();
 
   constructor(public dialog: MatDialog, private centreService: CentreService, private loginService: LoginService) {
-    this.centreService.getAllCentres().subscribe(resultCentres => {
-      this.dataSource.data = this.mapCentres(resultCentres);
-    })
+    this.updateTable();
   }
   
   getLoginService() {
     return this.loginService;
+  }
+
+  updateTable() {
+    this.centreService.getAllCentres().subscribe(resultCentres => {
+      this.dataSource.data = this.mapCentres(resultCentres);
+    })
   }
 
   mapCentres(resultCentres: Centre[]) {
@@ -71,22 +75,30 @@ export class ManageCentersComponent {
   }
 
   openAddCenterDialog(): void {
-    this.dialog.open(AddCenterDialog, {
+    const dialogRef = this.dialog.open(AddCenterDialog, {
       width: '500px',
       disableClose: true,
       backdropClass: 'blur-background',
       panelClass: 'custom-dialog-container'
     });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.updateTable();
+    });
   }
 
   editCenter(center: any) {
     console.log('Editing center:', center);
-    this.dialog.open(UpdateCenterDialog, {
+    const dialogRef = this.dialog.open(UpdateCenterDialog, {
       width: '500px',
       disableClose: true,
       backdropClass: 'blur-background',
       panelClass: 'custom-dialog-container',
       data: center
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.updateTable();
     });
   }
 
@@ -94,7 +106,7 @@ export class ManageCentersComponent {
     this.centreService.deleteCentre(center.id).subscribe({
       next: (c) => {
         console.log('Centre supprimé :', c);
-        this.filterCentres();
+        this.updateTable();
     }});
   }
 }

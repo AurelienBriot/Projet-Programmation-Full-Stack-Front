@@ -4,11 +4,11 @@ import { LoginComponent } from './components/login/login.component';
 import { AppointmentFormComponent } from './components/appointment-form/appointment-form.component';
 import { ConfirmationComponent } from './components/confirmation/confirmation.component';
 import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
-import { ManageCentersComponent } from './components/manage-centers/manage-centers.component';
+import { ManageCentersComponent } from './components/admin/manage-centers/manage-centers.component';
 import { AuthGuard } from './auth-guard.service';
-import { ManagePlanningComponent } from './components/manage-planning/manage-planning.component';
-import { MyCenterComponent } from './admin/my-center/my-center.component';
-import { ManageSuperAdminsComponent } from './admin/manage-super-admins/manage-super-admins.component';
+import { ManagePlanningComponent } from './components/admin/manage-planning/manage-planning.component';
+import { MyCenterComponent } from './components/admin/my-center/my-center.component';
+import { ManageSuperAdminsComponent } from './components/admin/manage-super-admins/manage-super-admins.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'search', pathMatch: 'full' },
