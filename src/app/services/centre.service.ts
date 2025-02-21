@@ -7,6 +7,9 @@ import { Centre } from '../interfaces/centre';
   providedIn: 'root'
 })
 export class CentreService {
+  updateSuperAdmin(updatedCentre: Centre) {
+    throw new Error('Method not implemented.');
+  }
 
   constructor(private httpClient: HttpClient) { }
 

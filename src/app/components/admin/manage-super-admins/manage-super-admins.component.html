@@ -4,33 +4,52 @@
     <!-- Barre de recherche -->
     <mat-form-field appearance="outline" class="search-bar">
       <mat-label>Rechercher un Super Admin</mat-label>
-      <input matInput [(ngModel)]="searchQuery" (input)="filterSuperAdmins()" placeholder="Entrez un nom ou email">
+      <input matInput [(ngModel)]="searchQuery" (input)="filterSuperAdmins()" placeholder="Entrez un nom">
     </mat-form-field>
   
     <!-- Tableau des Super Admins -->
     <table mat-table [dataSource]="dataSource" class="styled-table mat-elevation-z8">
-      <!-- Prénom -->
-      <ng-container matColumnDef="firstName">
-        <th mat-header-cell *matHeaderCellDef> Prénom </th>
-        <td mat-cell *matCellDef="let superAdmin"> {{ superAdmin.firstName }} </td>
-      </ng-container>
-  
+
       <!-- Nom -->
       <ng-container matColumnDef="lastName">
         <th mat-header-cell *matHeaderCellDef> Nom </th>
-        <td mat-cell *matCellDef="let superAdmin"> {{ superAdmin.lastName }} </td>
+        <td mat-cell *matCellDef="let superAdmin"> {{ superAdmin.nom }} </td>
       </ng-container>
   
+      <!-- Prénom -->
+      <ng-container matColumnDef="firstName">
+        <th mat-header-cell *matHeaderCellDef> Prénom </th>
+        <td mat-cell *matCellDef="let superAdmin"> {{ superAdmin.prenom }} </td>
+      </ng-container>
+
       <!-- Email -->
       <ng-container matColumnDef="email">
         <th mat-header-cell *matHeaderCellDef> Email </th>
         <td mat-cell *matCellDef="let superAdmin"> {{ superAdmin.email }} </td>
       </ng-container>
-  
-      <!-- Mot de passe -->
-      <ng-container matColumnDef="password">
-        <th mat-header-cell *matHeaderCellDef> Mot de passe </th>
-        <td mat-cell *matCellDef="let superAdmin"> {{ superAdmin.password }} </td>
+      
+      <!-- Email -->
+      <ng-container matColumnDef="phone">
+        <th mat-header-cell *matHeaderCellDef> N° de téléphone </th>
+        <td mat-cell *matCellDef="let superAdmin"> {{ superAdmin.telephone }} </td>
+      </ng-container>
+
+      <!-- Login -->
+      <ng-container matColumnDef="login">
+        <th mat-header-cell *matHeaderCellDef> Login </th>
+        <td mat-cell *matCellDef="let superAdmin"> {{ superAdmin.login }} </td>
+      </ng-container>
+
+      <!-- Adresse -->
+      <ng-container matColumnDef="address">
+        <th mat-header-cell *matHeaderCellDef> Adresse </th>
+        <td mat-cell *matCellDef="let superAdmin"> {{ superAdmin.adresse }} </td>
+      </ng-container>
+
+      <!-- Ville -->
+      <ng-container matColumnDef="city">
+        <th mat-header-cell *matHeaderCellDef> Ville </th>
+        <td mat-cell *matCellDef="let superAdmin"> {{ superAdmin.ville }} </td>
       </ng-container>
   
       <!-- Actions -->
@@ -38,6 +57,7 @@
         <th mat-header-cell *matHeaderCellDef> Actions </th>
         <td mat-cell *matCellDef="let superAdmin">
           <div class="action-buttons">
+            <button mat-button class="modify-button" (click)="editPasswordSuperAdmin(superAdmin)">Changer le mot de passe</button>
             <button mat-button class="modify-button" (click)="editSuperAdmin(superAdmin)">Modifier</button>
             <button mat-button class="delete-button" (click)="deleteSuperAdmin(superAdmin)">Supprimer</button>
           </div>
