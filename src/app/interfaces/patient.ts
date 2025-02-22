@@ -10,4 +10,5 @@ export interface Patient {
     telephone: string,
     estVaccine: boolean
     creneau?: Creneau
+
 }

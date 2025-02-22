@@ -2,7 +2,8 @@ import { Centre } from "./centre"
 import { Patient } from "./patient"
 
 export interface Creneau {
-    id: number,
+    estReserve: boolean,
+    id?: number,
     date: Date,
     heure: number,
     minute: number,

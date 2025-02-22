@@ -43,7 +43,9 @@ export class ManagePlanningComponent  {
 
   mapPatients(result: Patient[]) {
       return result.map(patient => {
-        const creneauAssocie = this.creneaux.find(creneau => creneau.patient?.id === patient.id);
+        console.log(patient.id)
+        console.log("terst: ", this.creneaux.find(creneau => creneau.patient!.id === patient.id))
+        let creneauAssocie = this.creneaux.find(creneau => creneau.patient!.id === patient.id);
         return {
           id: patient.id,
           nom: patient.nom,

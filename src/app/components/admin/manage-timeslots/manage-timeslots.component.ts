@@ -1,50 +1,86 @@
-import { MatFormField } from '@angular/material/form-field';
-import { MatLabel } from '@angular/material/form-field';
-import { MatTable } from '@angular/material/table';
-import { MatInput } from '@angular/material/input';
 import { Component } from '@angular/core';
+import { MatTableModule, MatTableDataSource } from '@angular/material/table';
+import { MatDialog, MatDialogModule,  } from '@angular/material/dialog';
+import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { AddCreneauDialog } from './dialogs/add-timeslot.component';
+import { AppointmentService } from 'app/services/appointment.service';
+import { Creneau } from 'app/interfaces/creneau';
+import {MatDatepickerModule} from '@angular/material/datepicker'; 
+import {MatNativeDateModule} from '@angular/material/core';
 
 @Component({
-  selector: 'app-manage-timeslots',
+  selector: 'app-manage-centers',
   standalone: true,
-  imports: [MatFormField, MatLabel, MatTable, MatInput],
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatCardModule,
+    MatButtonModule,
+    MatTableModule,
+    MatDialogModule,
+    MatDatepickerModule,
+    MatNativeDateModule
+  ],
   templateUrl: './manage-timeslots.component.html',
-  styleUrl: './manage-timeslots.component.scss'
+  styleUrls: ['./manage-timeslots.component.scss']
 })
+
+
 export class ManageTimeslotsComponent {
   searchQuery: string = '';
+  
+  displayedColumns: string[] = ['centre', 'date', 'heure', 'estReserve', 'actions'];
 
-  centers = [
-    { name: 'CHU Lyon', address: '1 Rue de l\'Hôpital, 69000 Lyon' },
-    { name: 'Clinique Pasteur', address: '12 Rue Pasteur, 75015 Paris' },
-  ];
+  dataSource = new MatTableDataSource<{ nom: string | undefined ; date: Date | undefined; heure: string; estReserve: string; }>();
 
-  filteredCenters = [...this.centers];
-
-  filterData() {
-    const query = this.searchQuery.toLowerCase();
-    this.filteredCenters = this.centers.filter(
-      (center) =>
-        center.name.toLowerCase().includes(query) ||
-        center.address.toLowerCase().includes(query)
-    );
+  constructor(public dialog: MatDialog, private creneauService: AppointmentService) {
+    this.updateTable();
+  }
+  
+  updateTable() {
+    this.creneauService.getAllCreneaux().subscribe(result => {
+      this.dataSource.data = this.mapCreneaux(result);
+    });
   }
 
-  addCenter() {
-    const newCenter = { name: 'Nouveau Centre', address: 'Adresse Inconnue' };
-    this.centers.push(newCenter);
-    this.filterData(); // Refresh filtered list
-    alert('Nouveau centre ajouté !');
+  mapCreneaux(result: Creneau[]) {
+    return result.map(creneau => ({
+      id: creneau.id,
+      nom: creneau.centre?.nom,
+      centre: creneau.centre,
+      heure: String(creneau.heure),
+      minute: Number(creneau.minute),
+      date: creneau.date,
+      estReserve: creneau.estReserve? 'Réservé' : 'Non réservé'
+    }));
   }
 
-  editCenter(center: any) {
-    alert(`Modifier le centre: ${center.name}`);
+  openAddCreneauDialog(): void {
+    const dialogRef = this.dialog.open(AddCreneauDialog, {
+      width: '500px',
+      disableClose: true,
+      backdropClass: 'blur-background',
+      panelClass: 'custom-dialog-container'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.updateTable();
+    });
   }
 
-  deleteCenter(center: any) {
-    if (confirm(`Voulez-vous supprimer ${center.name} ?`)) {
-      this.centers = this.centers.filter((c) => c !== center);
-      this.filterData(); // Refresh filtered list
-    }
+  deleteCreneau(creneau: any) {
+    this.creneauService.deleteCreneau(creneau.id).subscribe({
+      next: (c) => {
+        console.log('Créneau supprimé :', c);
+        this.updateTable();
+    }});
   }
 }

@@ -1,44 +1,48 @@
 <div class="table-container">
-    <h2>Liste des créneaux</h2>
-  
-    <!-- Centers Table -->
-    <table mat-table [dataSource]="filteredCenters" class="styled-table mat-elevation-z8">
-      
-      <!-- Name Column -->
-      <ng-container matColumnDef="center">
-        <th mat-header-cell *matHeaderCellDef> Centre </th>
-        <td mat-cell *matCellDef="let timeslot"> {{ timeslot.center }} </td>
-      </ng-container>
-  
-      <!-- Address Column -->
-      <ng-container matColumnDef="date">
-        <th mat-header-cell *matHeaderCellDef> Date </th>
-        <td mat-cell *matCellDef="let timeslot"> {{ timeslot.date }} </td>
-      </ng-container>
+  <h2>Liste des Créneaux</h2>
 
-       <!-- Time Column -->
-       <ng-container matColumnDef="date">
-        <th mat-header-cell *matHeaderCellDef> Heure </th>
-        <td mat-cell *matCellDef="let timeslot"> {{ timeslot.heure }}:{{ timeslot.minute !== 0 ? timeslot.minute : '00' }} </td>
-      </ng-container>
-  
-      <!-- Actions Column -->
-      <ng-container matColumnDef="actions">
-        <th mat-header-cell *matHeaderCellDef> Actions </th>
-        <td mat-cell *matCellDef="let center">
-          <div class="action-buttons">
-            <button mat-button class="modify-button" (click)="editCenter(center)">Modifier</button>
-            <button mat-button class="delete-button" (click)="deleteCenter(center)">Supprimer</button>
-          </div>
-        </td>
-      </ng-container>
-  
-      <!-- Table Header & Rows -->
-      <tr mat-header-row *matHeaderRowDef="['name', 'address', 'actions']"></tr>
-      <tr mat-row *matRowDef="let row; columns: ['name', 'address', 'actions'];"></tr>
-    </table>
-  
-    <!-- Add Center Button -->
-    <button mat-flat-button class="add-button" (click)="addCenter()">Ajouter un Centre</button>
-  </div>
-  
+  <!-- creneaus Table -->
+  <table mat-table [dataSource]="dataSource" class="styled-table mat-elevation-z8">
+
+    <!-- Nom Column -->
+    <ng-container matColumnDef="centre">
+      <th mat-header-cell *matHeaderCellDef> Nom </th>
+      <td mat-cell *matCellDef="let creneau"> {{ creneau.nom }} </td>
+    </ng-container>
+
+    <!-- Date Column -->
+    <ng-container matColumnDef="date">
+      <th mat-header-cell *matHeaderCellDef> Date </th>
+      <td mat-cell *matCellDef="let creneau"> {{ creneau.date }} </td>
+    </ng-container>
+
+    <!-- Heure Column -->
+    <ng-container matColumnDef="heure">
+      <th mat-header-cell *matHeaderCellDef> Heure </th>
+      <td mat-cell *matCellDef="let creneau"> {{ creneau.heure }}:{{ creneau.minute !== 0 ? creneau.minute : '00' }} </td>
+    </ng-container>
+
+    <!-- EstReserve Column -->
+    <ng-container matColumnDef="estReserve">
+      <th mat-header-cell *matHeaderCellDef> Est reservé ? </th>
+      <td mat-cell *matCellDef="let creneau"> {{ creneau.estReserve }} </td>
+    </ng-container>
+
+    <!-- Actions Column -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef> Actions </th>
+      <td mat-cell *matCellDef="let creneau">
+        <div class="action-buttons">
+          <button mat-button class="delete-button" (click)="deleteCreneau(creneau)">Supprimer</button>
+        </div>
+      </td>
+    </ng-container>
+
+    <!-- Table Header & Rows -->
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <!-- Add creneau Button -->
+  <button mat-flat-button class="add-button" (click)="openAddCreneauDialog()">Ajouter un Créneau</button>
+</div>

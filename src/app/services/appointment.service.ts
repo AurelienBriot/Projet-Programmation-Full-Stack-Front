@@ -29,7 +29,7 @@ export class AppointmentService {
     });
    }
 
-  addNewPatient(patient: Patient, creneau_id: number) : Observable<Creneau> {
+  addNewPatient(patient: Patient, creneau_id: number | undefined) : Observable<Creneau> {
       return this.httpClient.put<Creneau>(`/api/creneau/${creneau_id}/patient`, patient);
     
    }
@@ -45,5 +45,14 @@ export class AppointmentService {
   deleteCreneau(creneau_id: number) : Observable<any> {
     return this.httpClient.delete<Creneau>(`/api/creneau/${creneau_id}`);
   }
+
+  getAllCreneaux() : Observable<Creneau[]> {
+    return this.httpClient.get<Creneau[]>("/api/tous-les-creneaux", {});
+  }
+
+  addCreneau(creneau: Creneau) : Observable<Creneau> {
+    return this.httpClient.post<Creneau>("/api/creneau", creneau);
+  }
+  
 
 }

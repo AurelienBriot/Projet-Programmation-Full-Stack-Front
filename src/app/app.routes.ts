@@ -10,6 +10,7 @@ import { ManagePlanningComponent } from './components/admin/manage-planning/mana
 import { ManageSuperAdminsComponent } from './components/admin/manage-super-admins/manage-super-admins.component';
 import { ManageAdminsComponent } from './components/admin/manage-admins/manage-admins.component';
 import { ManageMedecinsComponent } from './components/admin/manage-medecins/manage-medecins.component';
+import { ManageTimeslotsComponent } from './components/admin/manage-timeslots/manage-timeslots.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'search', pathMatch: 'full' },
@@ -26,7 +27,9 @@ export const routes: Routes = [
       { path: 'planning', component: ManagePlanningComponent, canActivate: [AuthGuard] },
       {path: 'super-admins', component: ManageSuperAdminsComponent, canActivate: [AuthGuard]},
       {path: 'admins', component: ManageAdminsComponent, canActivate: [AuthGuard]},
-      {path: 'medecins', component: ManageMedecinsComponent, canActivate: [AuthGuard]}
+      {path: 'medecins', component: ManageMedecinsComponent, canActivate: [AuthGuard]},
+      {path: 'creneaux', component: ManageTimeslotsComponent, canActivate: [AuthGuard]}
+
     ],
   }
 ];

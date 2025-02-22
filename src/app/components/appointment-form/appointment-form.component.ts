@@ -42,20 +42,20 @@ export class AppointmentFormComponent {
   }
 
   submit(form: any) {
-    if (form.valid) {
-      if(this.newPatient.creneau !== undefined && this.newPatient.creneau.id !== undefined) {
-        this.patientService.createPatient(this.newPatient).subscribe({
-          next: (patient) => {
-            console.log('Patient ajouté :', patient);
-            this.appointmentService.addNewPatient(patient, this.newPatient.creneau!.id).subscribe({
-              next(creneau) {
-                  console.log('Créneau mis à jour :', creneau);
-              },
-            });
-          }
-        });
-        this.router.navigate(['/confirmation'], { state: { appointment: this.newPatient } });
-      }
+    if (this.newPatient.creneau && this.newPatient.creneau.id !== undefined) {
+      this.patientService.createPatient(this.newPatient).subscribe({
+        next: (patient) => {
+          console.log('Patient ajouté :', patient);
+          
+          // Ici on peut être sûr que this.newPatient.creneau et this.newPatient.creneau.id existent.
+          this.appointmentService.addNewPatient(patient, this.newPatient.creneau!.id).subscribe({
+            next(creneau) {
+              console.log('Créneau mis à jour :', creneau);
+            },
+          });
+        }
+      });
+      this.router.navigate(['/confirmation'], { state: { appointment: this.newPatient } });
     }
   }
 
