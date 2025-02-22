@@ -49,7 +49,7 @@ export class ManageMedecinsComponent {
 
   mapMedecins(result: Utilisateur[]) {
     return result.map(utilisateur => {
-      let centreAssocie = this.centres.find(centre => Number(centre.administrateur?.id) === Number(utilisateur.id));
+      const centreAssocie = this.centres.find(centre => Number(centre.administrateur?.id) === Number(utilisateur.id));
       return {
         id: utilisateur.id,
         nom: utilisateur.nom,

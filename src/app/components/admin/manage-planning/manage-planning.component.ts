@@ -1,9 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatTableModule } from '@angular/material/table';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { Patient } from 'app/interfaces/patient';
+import { PatientService } from 'app/services/patient.service';
+import { Centre } from 'app/interfaces/centre';
+import { AppointmentService } from 'app/services/appointment.service';
+import { Creneau } from 'app/interfaces/creneau';
 
 @Component({
   selector: 'app-manage-planning',
@@ -12,49 +17,76 @@ import { MatButtonModule } from '@angular/material/button';
   templateUrl: './manage-planning.component.html',
   styleUrls: ['./manage-planning.component.scss']
 })
-export class ManagePlanningComponent implements OnInit {
-  searchTerm: string = '';
-  reservations: any[] = [];
-  filteredReservations: any[] = [];
+export class ManagePlanningComponent  {
+  searchQuery: string = '';
+  
+  patients: Patient[] = [];
+  creneaux: Creneau[] = [];
 
-  ngOnInit() {
-    this.loadReservations();
+  displayedColumns: string[] = ['lastName', 'firstName', 'centre', 'date', 'heure', 'statut', 'actions'];
+  dataSource = new MatTableDataSource<{ nom: string; prenom: string;  centre: Centre | undefined; date: Date | undefined; heure: string; statut: string }>();
+  
+
+  constructor(private patientService: PatientService, private creneauService: AppointmentService) {
+    this.creneauService.getCreneauxByEstReserve(true).subscribe(result => {
+      this.creneaux = result;
+      this.updateTable();
+    });
+    
+  }
+  
+  updateTable() {
+    this.patientService.getAllPatients().subscribe(result => {
+      this.dataSource.data = this.mapPatients(result);
+    });
   }
 
-  loadReservations() {
-    const storedReservations = JSON.parse(localStorage.getItem('appointments') || '[]');
-    this.reservations = storedReservations;
-    this.filteredReservations = [...this.reservations];
-  }
-
-  filterAppointments() {
-    const query = this.searchTerm.toLowerCase();
-    this.filteredReservations = this.reservations.filter(
-      (reservation) =>
-        reservation.firstName.toLowerCase().includes(query) ||
-        reservation.lastName.toLowerCase().includes(query)
-    );
-  }
-
-  validateAppointment(reservation: any) {
-    reservation.status = 'Validé';
-
-    // Update in localStorage
-    const updatedReservations = this.reservations.map((res) =>
-      res === reservation ? { ...res, status: 'Validé' } : res
-    );
-    localStorage.setItem('appointments', JSON.stringify(updatedReservations));
-  }
-
-  deleteAppointment(reservation: any) {
-    if (confirm("Êtes-vous sûr de vouloir supprimer ce rendez-vous ?")) {
-      // Remove from the array
-      this.reservations = this.reservations.filter((res) => res !== reservation);
-      this.filteredReservations = [...this.reservations];
-
-      // Update localStorage
-      localStorage.setItem('appointments', JSON.stringify(this.reservations));
-      console.log("🗑️ Rendez-vous supprimé :", reservation);
+  mapPatients(result: Patient[]) {
+      return result.map(patient => {
+        const creneauAssocie = this.creneaux.find(creneau => creneau.patient?.id === patient.id);
+        return {
+          id: patient.id,
+          nom: patient.nom,
+          prenom: patient.prenom,
+          creneau: creneauAssocie,
+          centre: creneauAssocie?.centre,
+          date: creneauAssocie?.date,
+          heure: String(creneauAssocie!.heure ),
+          minute: Number(creneauAssocie!.minute),
+          statut: patient.estVaccine ? 'Vacciné' : 'Non vacciné'
+        };
+      });
     }
+
+  filterPatient() {
+    if (this.searchQuery === '') {
+      this.patientService.getAllPatients().subscribe(result => {
+        this.dataSource.data = this.mapPatients(result);
+      })
+    }
+    else {
+      this.patientService.getAllPatientsByNom(this.searchQuery).subscribe(result => {
+        this.dataSource.data = this.mapPatients(result);
+      })
+    }
+  }
+
+  validatePatient(patient: Patient, creneau: Creneau) {
+    this.patientService.validerVaccination(patient).subscribe(() => {
+      this.creneauService.validerVaccination(creneau).subscribe(() => {
+        console.log("Rendez-vous validé :", patient, creneau);
+        this.updateTable();
+      });
+    });
+  }
+
+  deleteAppointment(patient_id: number, creneau_id: number) {
+    this.creneauService.deleteCreneau(creneau_id).subscribe(() => {
+      this.patientService.deletePatient(patient_id).subscribe(() => {
+        console.log("Rendez-vous supprimé :", patient_id, creneau_id);
+        this.updateTable();
+      }); 
+    });
+    
   }
 }
