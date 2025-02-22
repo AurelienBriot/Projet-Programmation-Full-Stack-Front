@@ -9,6 +9,7 @@ import { AuthGuard } from './auth-guard.service';
 import { ManagePlanningComponent } from './components/admin/manage-planning/manage-planning.component';
 import { MyCenterComponent } from './components/admin/my-center/my-center.component';
 import { ManageSuperAdminsComponent } from './components/admin/manage-super-admins/manage-super-admins.component';
+import { ManageAdminsComponent } from './components/admin/manage-admins/manage-admins.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'search', pathMatch: 'full' },
@@ -25,6 +26,7 @@ export const routes: Routes = [
       { path: 'planning', component: ManagePlanningComponent, canActivate: [AuthGuard] },
       { path: 'my-center', component: MyCenterComponent, canActivate: [AuthGuard] },  
       {path: 'super-admins', component: ManageSuperAdminsComponent, canActivate: [AuthGuard]},
+      {path: 'admins', component: ManageAdminsComponent, canActivate: [AuthGuard]}
     ],
   }
 ];

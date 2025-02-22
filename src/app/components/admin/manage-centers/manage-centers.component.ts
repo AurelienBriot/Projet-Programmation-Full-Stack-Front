@@ -1,6 +1,6 @@
-import { Component, Inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
-import { MAT_DIALOG_DATA, MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogModule,  } from '@angular/material/dialog';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -10,6 +10,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { CentreService } from 'app/services/centre.service';
 import { Centre } from 'app/interfaces/centre';
 import { LoginService } from 'app/services/login.service';
+import { AddCenterDialog } from './dialogs/add-center.component';
+import { UpdateCenterDialog } from './dialogs/edit-center.component';
+import { Utilisateur } from 'app/interfaces/utilisateur';
 
 @Component({
   selector: 'app-manage-centers',
@@ -33,9 +36,9 @@ import { LoginService } from 'app/services/login.service';
 export class ManageCentersComponent {
   searchQuery: string = '';
   
-  displayedColumns: string[] = ['name', 'address', 'postalCode', 'city', 'actions'];
+  displayedColumns: string[] = ['name', 'address', 'postalCode', 'city', 'admin', 'actions'];
 
-  dataSource = new MatTableDataSource<{ nom: string; adresse: string; codePostal: string; ville: string }>();
+  dataSource = new MatTableDataSource<{ nom: string; adresse: string; codePostal: string; ville: string; administrateur: Utilisateur | undefined }>();
 
   constructor(public dialog: MatDialog, private centreService: CentreService, private loginService: LoginService) {
     this.updateTable();
@@ -57,7 +60,8 @@ export class ManageCentersComponent {
       nom: centre.nom,
       adresse: centre.adresse,
       codePostal: centre.codePostal,
-      ville: centre.ville
+      ville: centre.ville,
+      administrateur: centre.administrateur
     }));
   }
 
@@ -108,147 +112,5 @@ export class ManageCentersComponent {
         console.log('Centre supprimé :', c);
         this.updateTable();
     }});
-  }
-}
-
-// --------------------------
-// Fenêtre Ajouter un centre
-// --------------------------
-
-@Component({
-  selector: 'app-add-center-dialog',
-  template: `
-    <div class="dialog-content">
-      <h2>Ajouter un Centre</h2>
-      <form #form="ngForm" (ngSubmit)="submit(form)">
-        <mat-form-field appearance="outline">
-          <mat-label>Nom</mat-label>
-          <input matInput [(ngModel)]="newCentre.nom" name="nom" required>
-        </mat-form-field>
-        <mat-form-field appearance="outline">
-          <mat-label>Adresse</mat-label>
-          <input matInput [(ngModel)]="newCentre.adresse" name="adresse" required>
-        </mat-form-field>
-        <mat-form-field appearance="outline">
-          <mat-label>Code postal</mat-label>
-          <input matInput [(ngModel)]="newCentre.codePostal" name="codePostal" required>
-        </mat-form-field>
-        <mat-form-field appearance="outline">
-          <mat-label>Ville</mat-label>
-          <input matInput [(ngModel)]="newCentre.ville" name="ville" required>
-        </mat-form-field>
-        <div class="dialog-actions">
-          <button mat-button (click)="onCancel()">Annuler</button>
-          <button mat-flat-button color="primary">Ajouter</button>
-        </div>
-      </form>
-    </div>
-  `,
-  styles: [
-    `
-    .dialog-content {
-      padding: 20px;
-    }
-    .dialog-actions {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 20px;
-    }
-    `
-  ],
-  standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatButtonModule]
-})
-export class AddCenterDialog {
-
-  newCentre : Centre = { nom: "", adresse: "", codePostal: "", ville: "" };
-
-  constructor(private centreService: CentreService, public dialogRef: MatDialogRef<AddCenterDialog>) {
-    
-  }
-
-  submit(form: any) {
-    if (form.valid) {
-      this.centreService.addCentre(this.newCentre).subscribe({
-        next: (centre) => {
-          console.log('Centre ajouté :', centre);
-        }});
-      this.dialogRef.close();
-    }
-  }
-
-  onCancel(): void {
-    this.dialogRef.close();
-  }
-}
-
-// --------------------------
-// Fenêtre Modifier un centre
-// --------------------------
-
-@Component({
-  selector: 'app-add-center-dialog',
-  template: `
-    <div class="dialog-content">
-      <h2>Modifier un Centre</h2>
-      <form #form="ngForm" (ngSubmit)="submit(form)">
-        <mat-form-field appearance="outline">
-          <mat-label>Nom</mat-label>
-          <input matInput [(ngModel)]="updatedCentre.nom" name="nom" required>
-        </mat-form-field>
-        <mat-form-field appearance="outline">
-          <mat-label>Adresse</mat-label>
-          <input matInput [(ngModel)]="updatedCentre.adresse" name="adresse" required>
-        </mat-form-field>
-        <mat-form-field appearance="outline">
-          <mat-label>Code postal</mat-label>
-          <input matInput [(ngModel)]="updatedCentre.codePostal" name="codePostal" required>
-        </mat-form-field>
-        <mat-form-field appearance="outline">
-          <mat-label>Ville</mat-label>
-          <input matInput [(ngModel)]="updatedCentre.ville" name="ville" required>
-        </mat-form-field>
-        <div class="dialog-actions">
-          <button mat-button (click)="onCancel()">Annuler</button>
-          <button mat-flat-button color="primary">Modifier</button>
-        </div>
-      </form>
-    </div>
-  `,
-  styles: [
-    `
-    .dialog-content {
-      padding: 20px;
-    }
-    .dialog-actions {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 20px;
-    }
-    `
-  ],
-  standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatButtonModule]
-})
-export class UpdateCenterDialog {
-
-  updatedCentre : Centre = { id: 0, nom: "", adresse: "", codePostal: "", ville: "" };
-
-  constructor(private centreService: CentreService, public dialogRef: MatDialogRef<AddCenterDialog>, @Inject(MAT_DIALOG_DATA) public centre: any) {
-    this.updatedCentre = { ...centre };
-  }
-
-  submit(form: any) {
-    if (form.valid) {
-      this.centreService.updateCentre(this.updatedCentre).subscribe({
-        next: (c) => {
-          console.log('Centre modifié :', c);
-        }});
-      this.dialogRef.close();
-    }
-  }
-
-  onCancel(): void {
-    this.dialogRef.close();
   }
 }

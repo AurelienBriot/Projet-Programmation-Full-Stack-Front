@@ -1,3 +1,5 @@
+import { Centre } from "./centre";
+
 export interface Utilisateur {
     id?: number,
     nom: string,

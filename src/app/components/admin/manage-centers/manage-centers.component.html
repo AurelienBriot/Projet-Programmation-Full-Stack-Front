@@ -34,6 +34,12 @@
       <td mat-cell *matCellDef="let center"> {{ center.ville }} </td>
     </ng-container>
 
+    <!-- City Column -->
+    <ng-container matColumnDef="admin">
+      <th mat-header-cell *matHeaderCellDef> Administrateur </th>
+      <td mat-cell *matCellDef="let center"> {{ center.administrateur.nom }} {{ center.administrateur.prenom }} </td>
+    </ng-container>
+
     <!-- Actions Column -->
     <ng-container matColumnDef="actions">
       <th mat-header-cell *matHeaderCellDef> Actions </th>

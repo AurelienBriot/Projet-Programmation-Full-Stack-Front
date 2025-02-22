@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class UtilisateurService {
+
   
   constructor(private httpClient: HttpClient) { }
 
@@ -25,6 +26,14 @@ export class UtilisateurService {
 
   getAllAdmins() : Observable<Utilisateur[]> {
     return this.httpClient.get<Utilisateur[]>("/api/admins", {});
+  }
+
+  getAllAdminsByNom(searchQuery: string) {
+    return this.httpClient.get<Utilisateur[]>("/api/admins", {
+      params: {
+        nom: searchQuery
+      }
+    });
   }
   
   getAllMedecins() : Observable<Utilisateur[]> {
