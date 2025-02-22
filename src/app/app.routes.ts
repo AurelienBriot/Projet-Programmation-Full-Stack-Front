@@ -7,9 +7,9 @@ import { AdminDashboardComponent } from './components/admin-dashboard/admin-dash
 import { ManageCentersComponent } from './components/admin/manage-centers/manage-centers.component';
 import { AuthGuard } from './auth-guard.service';
 import { ManagePlanningComponent } from './components/admin/manage-planning/manage-planning.component';
-import { MyCenterComponent } from './components/admin/my-center/my-center.component';
 import { ManageSuperAdminsComponent } from './components/admin/manage-super-admins/manage-super-admins.component';
 import { ManageAdminsComponent } from './components/admin/manage-admins/manage-admins.component';
+import { ManageMedecinsComponent } from './components/admin/manage-medecins/manage-medecins.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'search', pathMatch: 'full' },
@@ -24,9 +24,9 @@ export const routes: Routes = [
     children: [
       { path: 'centers', component: ManageCentersComponent, canActivate: [AuthGuard] },
       { path: 'planning', component: ManagePlanningComponent, canActivate: [AuthGuard] },
-      { path: 'my-center', component: MyCenterComponent, canActivate: [AuthGuard] },  
       {path: 'super-admins', component: ManageSuperAdminsComponent, canActivate: [AuthGuard]},
-      {path: 'admins', component: ManageAdminsComponent, canActivate: [AuthGuard]}
+      {path: 'admins', component: ManageAdminsComponent, canActivate: [AuthGuard]},
+      {path: 'medecins', component: ManageMedecinsComponent, canActivate: [AuthGuard]}
     ],
   }
 ];

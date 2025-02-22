@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class UtilisateurService {
-
+  
   
   constructor(private httpClient: HttpClient) { }
 
@@ -40,6 +40,15 @@ export class UtilisateurService {
     return this.httpClient.get<Utilisateur[]>("/api/medecins", {});
   }
 
+  getAllMedecinsByNom(searchQuery: string) {
+    return this.httpClient.get<Utilisateur[]>("/api/medecins", {
+      params: {
+        nom: searchQuery
+      }
+    });
+  }
+
+
   addSuperAdmin(utilisateur: Utilisateur) : Observable<Utilisateur> {
     return this.httpClient.post<Utilisateur>("/api/super-admin", utilisateur);
   }
@@ -48,7 +57,7 @@ export class UtilisateurService {
     return this.httpClient.post<Utilisateur>("/api/admin", utilisateur);
   }
 
-  addMedecinAdmin(utilisateur: Utilisateur) : Observable<Utilisateur> {
+  addMedecin(utilisateur: Utilisateur) : Observable<Utilisateur> {
     return this.httpClient.post<Utilisateur>("/api/medecin", utilisateur);
   }
 
