@@ -9,6 +9,7 @@ import { PatientService } from 'app/services/patient.service';
 import { Centre } from 'app/interfaces/centre';
 import { AppointmentService } from 'app/services/appointment.service';
 import { Creneau } from 'app/interfaces/creneau';
+import { LoginService } from 'app/services/login.service';
 
 @Component({
   selector: 'app-manage-planning',
@@ -18,6 +19,7 @@ import { Creneau } from 'app/interfaces/creneau';
   styleUrls: ['./manage-planning.component.scss']
 })
 export class ManagePlanningComponent  {
+
   searchQuery: string = '';
   
   patients: Patient[] = [];
@@ -27,7 +29,7 @@ export class ManagePlanningComponent  {
   dataSource = new MatTableDataSource<{ nom: string; prenom: string;  centre: Centre | undefined; date: Date | undefined; heure: string; statut: string }>();
   
 
-  constructor(private patientService: PatientService, private creneauService: AppointmentService) {
+  constructor(private patientService: PatientService, private creneauService: AppointmentService, private loginService: LoginService) {
     this.creneauService.getCreneauxByEstReserve(true).subscribe(result => {
       this.creneaux = result;
       this.updateTable();
@@ -91,4 +93,8 @@ export class ManagePlanningComponent  {
     });
     
   }
+
+  getLoginService() {
+    return this.loginService;
+    }
 }

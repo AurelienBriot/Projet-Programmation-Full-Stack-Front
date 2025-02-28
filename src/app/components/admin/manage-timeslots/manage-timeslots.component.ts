@@ -12,6 +12,7 @@ import { AppointmentService } from 'app/services/appointment.service';
 import { Creneau } from 'app/interfaces/creneau';
 import {MatDatepickerModule} from '@angular/material/datepicker'; 
 import {MatNativeDateModule} from '@angular/material/core';
+import { LoginService } from 'app/services/login.service';
 
 @Component({
   selector: 'app-manage-centers',
@@ -35,13 +36,14 @@ import {MatNativeDateModule} from '@angular/material/core';
 
 
 export class ManageTimeslotsComponent {
+  
   searchQuery: string = '';
   
   displayedColumns: string[] = ['centre', 'date', 'heure', 'estReserve', 'actions'];
 
   dataSource = new MatTableDataSource<{ nom: string | undefined ; date: Date | undefined; heure: string; estReserve: string; }>();
 
-  constructor(public dialog: MatDialog, private creneauService: AppointmentService) {
+  constructor(public dialog: MatDialog, private creneauService: AppointmentService, private loginService: LoginService) {
     this.updateTable();
   }
   
@@ -82,5 +84,9 @@ export class ManageTimeslotsComponent {
         console.log('Créneau supprimé :', c);
         this.updateTable();
     }});
+  }
+
+  getLoginService() {
+    return this.loginService;
   }
 }

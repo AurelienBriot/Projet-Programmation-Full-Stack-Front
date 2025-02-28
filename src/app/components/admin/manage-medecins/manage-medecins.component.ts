@@ -13,6 +13,7 @@ import { UpdateMedecinDialog } from './dialogs/edit-medecin.component';
 import { UpdatePasswordMedecinDialog } from './dialogs/edit-password.component';
 import { Centre } from 'app/interfaces/centre';
 import { CentreService } from 'app/services/centre.service';
+import { LoginService } from 'app/services/login.service';
 
 @Component({
   selector: 'app-manage-super-medecins',
@@ -31,6 +32,9 @@ import { CentreService } from 'app/services/centre.service';
 })
 
 export class ManageMedecinsComponent {
+  getLoginService() {
+    return this.loginService;
+  }
   searchQuery: string = '';
   
   displayedColumns: string[] = ['lastName', 'firstName', 'login', 'email', 'phone', 'address', 'city', 'centre', 'actions'];
@@ -38,7 +42,7 @@ export class ManageMedecinsComponent {
   
   centres : Centre[] = [];
 
-  constructor(public dialog: MatDialog, private utilisateurService: UtilisateurService, private centreService: CentreService) {
+  constructor(public dialog: MatDialog, private utilisateurService: UtilisateurService, private centreService: CentreService, private loginService: LoginService) {
     this.centreService.getAllCentres().subscribe(result => {
       this.centres = result;
 

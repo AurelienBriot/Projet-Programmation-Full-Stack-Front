@@ -52,12 +52,12 @@
   <a (click)="logout()">Déconnexion</a>
   <nav class="menu">
     <ul>
-      <li><a (click)="navigateTo('centers')">Centres</a></li>
-      <li><a (click)="navigateTo('super-admins')">Super Admins</a></li>
-      <li><a (click)="navigateTo('admins')">Admins</a></li>
-      <li><a (click)="navigateTo('medecins')">Médecins</a></li>
-      <li><a (click)="navigateTo('planning')">Planning</a></li>
-      <li><a (click)="navigateTo('creneaux')">Créneaux</a></li>
+      <li><button mat-button [disabled]="!(getLoginService().hasRole('ROLE_SUPERADMIN') || getLoginService().hasRole('ROLE_ADMIN'))"  (click)="navigateTo('centers')">Centres</button></li>
+      <li><button mat-button [disabled]="!getLoginService().hasRole('ROLE_SUPERADMIN')" (click)="navigateTo('super-admins')">Super Admins</button></li>
+      <li><button mat-button [disabled]="!getLoginService().hasRole('ROLE_SUPERADMIN')" (click)="navigateTo('admins')">Admins</button></li>
+      <li><button mat-button [disabled]="!(getLoginService().hasRole('ROLE_SUPERADMIN') || getLoginService().hasRole('ROLE_ADMIN'))"  (click)="navigateTo('medecins')">Médecins</button></li>
+      <li><button mat-button (click)="navigateTo('planning')">Planning</button></li>
+      <li><button mat-button (click)="navigateTo('creneaux')">Créneaux</button></li>
     </ul>
   </nav>
 </div>

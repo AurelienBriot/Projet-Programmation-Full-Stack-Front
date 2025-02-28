@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
 
   connect(): void {
     this.loginService.connect(this.username, this.password).subscribe(value => {
-      this.router.navigate(["/admin/centers"])
+      this.router.navigate(["/admin/planning"])
     });
   }
 

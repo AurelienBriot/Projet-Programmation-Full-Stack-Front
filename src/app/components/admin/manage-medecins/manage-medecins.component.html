@@ -65,7 +65,7 @@
           <div class="action-buttons">
             <button mat-button class="modify-button" (click)="editPasswordMedecin(medecin)">Changer le mot de passe</button>
             <button mat-button class="modify-button" (click)="editMedecin(medecin)">Modifier</button>
-            <button mat-button class="delete-button" (click)="deleteMedecin(medecin)">Supprimer</button>
+            <button mat-button class="delete-button" [disabled]="!getLoginService().hasRole('ROLE_SUPERADMIN')" (click)="deleteMedecin(medecin)">Supprimer</button>
           </div>
         </td>
       </ng-container>

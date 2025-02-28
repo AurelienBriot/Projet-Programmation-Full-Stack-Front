@@ -33,7 +33,7 @@
       <th mat-header-cell *matHeaderCellDef> Actions </th>
       <td mat-cell *matCellDef="let creneau">
         <div class="action-buttons">
-          <button mat-button class="delete-button" (click)="deleteCreneau(creneau)">Supprimer</button>
+          <button mat-button class="delete-button" [disabled]="!(getLoginService().hasRole('ROLE_SUPERADMIN') || getLoginService().hasRole('ROLE_ADMIN'))" (click)="deleteCreneau(creneau)">Supprimer</button>
         </div>
       </td>
     </ng-container>
@@ -44,5 +44,5 @@
   </table>
 
   <!-- Add creneau Button -->
-  <button mat-flat-button class="add-button" (click)="openAddCreneauDialog()">Ajouter un Créneau</button>
+  <button mat-flat-button class="add-button" [disabled]="!(getLoginService().hasRole('ROLE_SUPERADMIN') || getLoginService().hasRole('ROLE_ADMIN'))" (click)="openAddCreneauDialog()">Ajouter un Créneau</button>
 </div>

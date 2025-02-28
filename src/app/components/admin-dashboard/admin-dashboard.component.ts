@@ -13,6 +13,7 @@ import { LoginService } from 'app/services/login.service';
   styleUrls: ['./admin-dashboard.component.scss'],
 })
 export class AdminDashboardComponent {
+  
   constructor(private router: Router, private loginService: LoginService) {}
 
   navigateTo(page: string) {
@@ -25,5 +26,9 @@ export class AdminDashboardComponent {
 
   logout() {
     this.loginService.logout();
+  }
+
+  getLoginService() {
+    return this.loginService;
   }
 }
