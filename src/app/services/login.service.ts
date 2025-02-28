@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, catchError, map, Observable, Subject, throwError } from 'rxjs';
+import { BehaviorSubject, catchError, map, Observable, Subject, switchMap, tap, throwError } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Utilisateur } from '../interfaces/utilisateur';
@@ -21,22 +21,23 @@ export class LoginService {
 
   connect(username: string, password: string): Observable<any> {
     let token = this.createToken(username, password);
-    
+  
     let options = {
       headers: {
         'Authorization': token,
         'Content-Type': 'application/json'
       }
     };
-
-    return this.httpClient.post<string>('/api/login', null, options).pipe(map(value => {
-      // this.password = password;
-      // this.username = username;
-      console.log("Connected");
-      this.isLoggedSubject.next(true);
-      this.loadUserRoles();
-     
-    }))
+  
+    return this.httpClient.post<string>('/api/login', null, options).pipe(
+      switchMap(() => { // Attendre que loadUserRoles() soit terminé
+        console.log("Connected");
+        return this.loadUserRoles(); // Retourne l'Observable
+      }),
+      tap(() => {
+        this.isLoggedSubject.next(true);
+      })
+    );
   }
 
   private createToken(username?: string, password?: string) {
@@ -44,13 +45,17 @@ export class LoginService {
     return token;
   } 
 
-  private loadUserRoles() {
-    this.httpClient.get<{ username: string, roles: string[] }>('/api/me').subscribe(response => {
-      this.role = response.roles[0];
-      console.log("Role : ", this.role);
-      sessionStorage.setItem('role', JSON.stringify(this.role));
-    });
+  private loadUserRoles(): Observable<void> {
+    return this.httpClient.get<{ username: string, roles: string[] }>('/api/me').pipe(
+      tap(response => {
+        this.role = response.roles[0];
+        console.log("Role : ", this.role);
+        sessionStorage.setItem('role', this.role);
+      }),
+      map(() => {})
+    );
   }
+  
 
   hasRole(roleToTest: string): boolean {
     return this.role === roleToTest;

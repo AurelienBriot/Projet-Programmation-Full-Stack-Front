@@ -22,13 +22,14 @@ export const routes: Routes = [
     path: 'admin',
     component: AdminDashboardComponent,
     canActivate: [AuthGuard],
+    data: { roles: ['ROLE_SUPERADMIN', 'ROLE_ADMIN', 'ROLE_MEDECIN'] } ,
     children: [
-      { path: 'centers', component: ManageCentersComponent, canActivate: [AuthGuard] },
-      { path: 'planning', component: ManagePlanningComponent, canActivate: [AuthGuard] },
-      {path: 'super-admins', component: ManageSuperAdminsComponent, canActivate: [AuthGuard]},
-      {path: 'admins', component: ManageAdminsComponent, canActivate: [AuthGuard]},
-      {path: 'medecins', component: ManageMedecinsComponent, canActivate: [AuthGuard]},
-      {path: 'creneaux', component: ManageTimeslotsComponent, canActivate: [AuthGuard]}
+      { path: 'centers', component: ManageCentersComponent, canActivate: [AuthGuard], data: { roles: ['ROLE_SUPERADMIN', 'ROLE_ADMIN'] } },
+      { path: 'planning', component: ManagePlanningComponent, canActivate: [AuthGuard], data: { roles: ['ROLE_SUPERADMIN', 'ROLE_ADMIN', 'ROLE_MEDECIN'] } },
+      { path: 'super-admins', component: ManageSuperAdminsComponent, canActivate: [AuthGuard], data: { roles: ['ROLE_SUPERADMIN'] } },
+      { path: 'admins', component: ManageAdminsComponent, canActivate: [AuthGuard], data: { roles: ['ROLE_SUPERADMIN'] } },
+      { path: 'medecins', component: ManageMedecinsComponent, canActivate: [AuthGuard], data: { roles: ['ROLE_SUPERADMIN', 'ROLE_ADMIN', 'ROLE_MEDECIN'] } },
+      { path: 'creneaux', component: ManageTimeslotsComponent, canActivate: [AuthGuard], data: { roles: ['ROLE_SUPERADMIN', 'ROLE_ADMIN', 'ROLE_MEDECIN'] }  }
 
     ],
   }

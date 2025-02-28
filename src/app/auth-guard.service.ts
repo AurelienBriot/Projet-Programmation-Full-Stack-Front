@@ -17,8 +17,18 @@ export class AuthGuard implements CanActivate {
       timeout(1000), 
       map(isLogged => {
         if (isLogged) {
-          console.log("User is logged");
-          return true;
+
+
+          const allowedRoles: string[] = route.data['roles']; // Liste des rôles autorisés
+          const userRole = sessionStorage.getItem('role'); 
+
+          if (userRole && allowedRoles.includes(userRole)) {
+            console.log("User has correct role:", userRole);
+            return true;
+          } else {
+            console.warn("Access denied. Allowed roles:", allowedRoles, "User role:", userRole);            
+            return false;
+          }
         } else {
           console.log("User is not logged");
           return this.router.parseUrl('/login');
